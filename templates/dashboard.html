@@ -10,7 +10,7 @@
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,200,300,regular,500,600,700,800,900"
         rel="stylesheet" />
-    <link rel="stylesheet" href="./dashboard.css">
+    <link rel="stylesheet" href="static/css/dashboard.css">
     <title>ExpertSelect</title>
 </head>
 
@@ -25,36 +25,35 @@
         <div class="nav-links">
             <div class="nav-item" data-target="dashboard">
                 <div class="icon">
-                    <img src="./menu.png" alt="">
+                    <img src="static/img/menu.png" alt="">
                 </div>
                 <span>Dashboard</span>
             </div>
             <div class="nav-item" data-target="addExpert">
                 <div class="icon">
-                    <img src="./administrator.png" alt="">
+                    <img src="static/img/administrator.png" alt="">
                     <span>+</span>
                 </div>
                 <span>Add Expert</span>
             </div>
             <div class="nav-item" data-target="viewExpert">
                 <div class="icon">
-                    <img src="./administrator.png" alt="">
+                    <img src="static/img/administrator.png" alt="">
                 </div>
                 <span>View Experts</span>
             </div>
             <div class="nav-item" data-target="viewCandidates">
                 <div class="icon">
-                    <img src="./employee.png" alt="">
+                    <img src="static/img/employee.png" alt="">
                 </div>
                 <span>View Candidates</span>
             </div>
             <div class="nav-item">
                 <div class="icon">
-                    <img src="./logout.png" alt="">
+                    <img src="static/img/logout.png" alt="">
                 </div>
                 <span>Log out</span>
             </div>
-            </>
     </nav>
     <div id="dashboard" class="page active">
         <h1>Dashboard</h1>
@@ -68,7 +67,9 @@
     <div id="viewCandidates" class="page">
         <h1>View Candidates</h1>
     </div>
-    <script src="./dashboard.js"></script>
+
+    
+    <script src="static/js/dashboard.js"></script>
     <script>
         function showFileName() {
             // Get the file input element
