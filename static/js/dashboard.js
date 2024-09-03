@@ -5,19 +5,24 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(pages);
 
     // Add click event listener to each nav link
-    navLinks.forEach(link => {
-        link.addEventListener("click", function (e) {
-            e.preventDefault(); // Prevent default anchor click behavior
-            // Get the target page from data-target attribute
-            const targetPage = this.getAttribute("data-target");
-            // Hide all pages
-            pages.forEach(page => {
-                page.classList.remove("active");
-            });
+    navLinks.forEach((link, index) => {
+        // Check if it's not the last item
+        if (index !== navLinks.length - 1) {
+            link.addEventListener("click", function (e) {
+                e.preventDefault(); // Prevent default anchor click behavior
 
-            // Show the selected page
-            const selectedPage = document.getElementById(targetPage);
-            selectedPage.classList.add("active");
-        });
+                // Get the target page from the data-target attribute
+                const targetPage = this.getAttribute("data-target");
+
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.remove("active");
+                });
+
+                // Show the selected page
+                const selectedPage = document.getElementById(targetPage);
+                selectedPage.classList.add("active");
+            });
+        }
     });
 });
