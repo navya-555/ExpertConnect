@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=SUSE:100,200,300,regular,500,600,700,800" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Titillium+Web:200,200italic,300,300italic,regular,italic,600,600italic,700,700italic,900"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,200,300,regular,500,600,700,800,900"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./dashboard.css">
+    <title>ExpertSelect</title>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <!-- <div>
+                <img src="./expert.png" alt="">
+            </div> -->
+            <h4>ExpertSelect</h4>
+        </div>
+        <div class="nav-links">
+            <div class="nav-item" data-target="dashboard">
+                <div class="icon">
+                    <img src="./menu.png" alt="">
+                </div>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item" data-target="addExpert">
+                <div class="icon">
+                    <img src="./administrator.png" alt="">
+                    <span>+</span>
+                </div>
+                <span>Add Expert</span>
+            </div>
+            <div class="nav-item" data-target="viewExpert">
+                <div class="icon">
+                    <img src="./administrator.png" alt="">
+                </div>
+                <span>View Experts</span>
+            </div>
+            <div class="nav-item" data-target="viewCandidates">
+                <div class="icon">
+                    <img src="./employee.png" alt="">
+                </div>
+                <span>View Candidates</span>
+            </div>
+            <div class="nav-item">
+                <div class="icon">
+                    <img src="./logout.png" alt="">
+                </div>
+                <span>Log out</span>
+            </div>
+            </>
+    </nav>
+    <div id="dashboard" class="page active">
+        <h1>Dashboard</h1>
+    </div>
+    <div id="addExpert" class="page">
+        <h1>Create New Expert</h1>
+    </div>
+    <div id="viewExpert" class="page">
+        <h1>View Experts</h1>
+    </div>
+    <div id="viewCandidates" class="page">
+        <h1>View Candidates</h1>
+    </div>
+    <script src="./dashboard.js"></script>
+    <script>
+        function showFileName() {
+            // Get the file input element
+            const fileInput = document.getElementById('file-upload');
+            // Get the selected file name
+            const fileName = fileInput.files[0]?.name || 'No file chosen';
+            // Display the file name
+            document.getElementById('file-name').textContent = fileName;
+        }
+    </script>
+</body>
+
+</html>
