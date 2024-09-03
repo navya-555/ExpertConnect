@@ -54,13 +54,77 @@
                 </div>
                 <span>Log out</span>
             </div>
-            </>
+        </div>
     </nav>
     <div id="dashboard" class="page active">
         <h1>Dashboard</h1>
     </div>
     <div id="addExpert" class="page">
         <h1>Create New Expert</h1>
+        <form action="">
+            <div class="form-section">
+                <h1>Personal Information: </h1>
+                <div class="input">
+                    <label for="name">Your Name: </label>
+                    <input type="text" name="name" id="name" required autofocus>
+                </div>
+                <div class="input">
+                    <label for="username">Your username: </label>
+                    <input type="text" name="username" id="username" required>
+                </div>
+                <div class="input">
+                    <label for="email">Your email: </label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div class="input">
+                    <label for="phone">Your phone no.: </label>
+                    <input type="text" name="phone" id="phone" required>
+                </div>
+            </div>
+            <div class="form-section">
+                <h1>Files</h1>
+                <div class="input">
+                    <label for="photo">Upload your profile picture: </label>
+                    <div class="fileInputContainer">
+                        <p>Upload from memory</p>
+                        <input type="file" name="photo" accept="image/jpg, image/jpeg, image/png" id="photo"
+                            onchange="showFileName(this, 'photo-file-name')" required>
+                    </div>
+                    <span id="photo-file-name">No file chosen</span>
+                </div>
+                <div class="input">
+                    <label for="resume">Upload your resume: </label>
+                    <div class="fileInputContainer">
+                        <p>Upload from memory</p>
+                        <input type="file" accept="application/pdf" name="resume" id="resume"
+                            onchange="showFileName(this, 'resume-file-name')" required>
+                    </div>
+                    <span id="resume-file-name">No file chosen</span>
+                </div>
+                <div class="input">
+                    <label for="cv">Upload your CV: </label>
+                    <div class="fileInputContainer">
+                        <p>Upload from memory</p>
+                        <input type="file" accept="application/pdf" name="cv" id="cv"
+                            onchange="showFileName(this, 'cv-file-name')" required>
+                    </div>
+                    <span id="cv-file-name">No file chosen</span>
+                </div>
+            </div>
+            <div class="form-section">
+                <h1>Links</h1>
+                <div class="input">
+                    <label for="googleScholarLink">Google Scholar Link:</label>
+                    <input type="url" name="googleScholarLink" id="googleScholarLink" placeholder="https://example.com"
+                        required>
+                </div>
+                <div class="input">
+                    <label for="githubLink">Github Profile Link:</label>
+                    <input type="url" name="githubLink" id="githubLink" placeholder="https://example.com" required>
+                </div>
+            </div>
+            <button>Register</button>
+        </form>
     </div>
     <div id="viewExpert" class="page">
         <h1>View Experts</h1>
@@ -70,13 +134,11 @@
     </div>
     <script src="./dashboard.js"></script>
     <script>
-        function showFileName() {
-            // Get the file input element
-            const fileInput = document.getElementById('file-upload');
-            // Get the selected file name
-            const fileName = fileInput.files[0]?.name || 'No file chosen';
-            // Display the file name
-            document.getElementById('file-name').textContent = fileName;
+        function showFileName(inputElement, displayElementId) {
+            // Get the selected file name from the input element
+            const fileName = inputElement.files[0]?.name || 'No file chosen';
+            // Display the file name in the specified span element
+            document.getElementById(displayElementId).textContent = fileName;
         }
     </script>
 </body>
