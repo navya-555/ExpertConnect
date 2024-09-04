@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,200,300,regular,500,600,700,800,900"
         rel="stylesheet" />
     <link rel="stylesheet" href="static/css/dashboard.css">
+    <script src="https://kit.fontawesome.com/ec53c9ed31.js" crossorigin="anonymous"></script>
     <title>ExpertSelect</title>
 </head>
 
@@ -62,7 +63,7 @@
         {% include 'add_expert.html' %}
     </div>
     <div id="viewExpert" class="page">
-        <h1>Registered Experts</h1>
+        <!-- <h1>Registered Experts</h1> -->
 
         {% if experts %}
         <table>
@@ -88,14 +89,14 @@
                     <td>{{ expert.phone }}</td>
                     <td>
                         {% if expert.google_scholar_link %}
-                        <a href="{{ expert.google_scholar_link }}" target="_blank">View</a>
+                        <a href="{{ expert.google_scholar_link }}" target="_blank">  <i class="fa-regular fa-eye"></i> View</a>
                         {% else %}
                         N/A
                         {% endif %}
                     </td>
                     <td>
                         {% if expert.github_link %}
-                        <a href="{{ expert.github_link }}" target="_blank">View</a>
+                        <a href="{{ expert.github_link }}" target="_blank"> <i class="fa-regular fa-eye"></i> View</a>
                         {% else %}
                         N/A
                         {% endif %}
@@ -110,14 +111,14 @@
                     <td>
                         {% if expert.resume %}
                         <a href="data:application/pdf;base64,{{ expert.resume | b64encode }}"
-                            download="resume.pdf">Download</a>
+                            download="resume.pdf"><i class="fa-solid fa-file-arrow-down"></i>Download</a>
                         {% else %}
                         N/A
                         {% endif %}
                     </td>
                     <td>
                         {% if expert.cv %}
-                        <a href="data:application/pdf;base64,{{ expert.cv | b64encode }}" download="cv.pdf">Download</a>
+                        <a href="data:application/pdf;base64,{{ expert.cv | b64encode }}" download="cv.pdf"><i class="fa-solid fa-file-arrow-down"></i>Download</a>
                         {% else %}
                         N/A
                         {% endif %}
