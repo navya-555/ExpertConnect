@@ -49,6 +49,7 @@ nav {
         gap: 10px;
         align-items: flex-start;
         div.nav-item {
+            display: inline-block; 
             text-align: left;
             width: 100%;
             height: 50px;
@@ -206,3 +207,13 @@ div#addExpert {
 .active {
     display: flex !important;
 }
+
+a {
+    text-decoration: none; /* Removes the underline */
+    color: white; /* Sets the text color to white */
+}
+
+a span {
+    color: inherit; /* Ensures the span inherits the color from the parent anchor */
+}
+
