@@ -11,3 +11,8 @@ Flask-SQLAlchemy
 requests
 bs4
 lxml
+google.generativeai
+PyPDF2
+scikit-learn
+sentence-transformers
+numpy==1.26.4
