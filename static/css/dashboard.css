@@ -94,7 +94,7 @@ div.page {
     height: 100vh;
     border-radius: 30px 0px 0px 30px;
     background-color: ghostwhite;
-    background-image: url(./background.svg);
+    background-image: url(../img/background.svg);
     background-size: cover;
     display: none;
     overflow-x: hidden;
