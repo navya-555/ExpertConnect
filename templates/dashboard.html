@@ -17,9 +17,6 @@
 <body>
     <nav>
         <div class="logo">
-            <!-- <div>
-                <img src="./expert.png" alt="">
-            </div> -->
             <h4>ExpertSelect</h4>
         </div>
         <div class="nav-links">
@@ -27,41 +24,41 @@
                 <div class="icon">
                     <img src="static/img/menu.png" alt="">
                 </div>
-                <span>Dashboard</span>
+                <span class="nav-item-title">Dashboard</span>
             </div>
             <div class="nav-item" data-target="addExpert">
                 <div class="icon">
                     <img src="static/img/administrator.png" alt="">
-                    <span>+</span>
+                    <i>+</i>
                 </div>
-                <span>Add Expert</span>
+                <span class="nav-item-title">Add Expert</span>
             </div>
             <div class="nav-item" data-target="viewExpert">
                 <div class="icon">
                     <img src="static/img/administrator.png" alt="">
                 </div>
-                <span>View Experts</span>
+                <span class="nav-item-title">View Experts</span>
             </div>
             <div class="nav-item" data-target="viewCandidates">
                 <div class="icon">
                     <img src="static/img/employee.png" alt="">
                 </div>
-                <span>View Candidates</span>
+                <span class="nav-item-title">View Candidates</span>
             </div>
             <div class="nav-item">
                 <div class="icon">
                     <img src="static/img/logout.png" alt="">
                 </div>
                 <a href="/logout">
-                    <span>Logout</span>
+                    <span class="nav-item-title">Logout</span>
                 </a>   
             </div>
         </div>
     </nav>
-    <div id="dashboard" class="page active">
+    <div id="dashboard" class="page">
         <h1>Dashboard</h1>
     </div>
-    <div id="addExpert" class="page">
+    <div id="addExpert" class="page active">
         <h1>Create New Expert</h1>
         <form action="">
             <div class="form-section">
@@ -86,7 +83,7 @@
             <div class="form-section">
                 <h1>Files</h1>
                 <div class="input">
-                    <label for="photo">Upload your profile picture: </label>
+                    <label for="photo">Upload your picture: </label>
                     <div class="fileInputContainer">
                         <p>Upload from memory</p>
                         <input type="file" name="photo" accept="image/jpg, image/jpeg, image/png" id="photo"
