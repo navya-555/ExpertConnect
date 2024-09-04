@@ -1,9 +1,11 @@
 import google.generativeai as genai
 import os
-import PyPDF2
+from utils.scrapers import gscholar_scraper
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 from dotenv import load_dotenv
+from PyPDF2 import PdfReader
+from io import BytesIO
 
 load_dotenv()
 genai.configure(api_key=os.environ["GOOGLE_API"])
@@ -12,18 +14,17 @@ emb_model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
 
 
-def extract_text_from_pdf(pdf_path):
-    with open(pdf_path, 'rb') as file:
-        reader = PyPDF2.PdfReader(file)
-        text = ""
-        for page in reader.pages:
-            text += page.extract_text()
+def extract_text_from_pdf(pdf_data):
+  # Create a BytesIO stream from the binary data
+    pdf_stream = BytesIO(pdf_data)
+    reader = PdfReader(pdf_stream)
+    text = ""
+    for page in reader.pages:
+        text += page.extract_text()
     return text
 
 
-
-
-def skill_domain_from_txt(text,model):
+def skill_domain_from_txt(text,model=gemini_model):
     prompt = f"""
     You are analyzing a candidate's resume. Identify the key skills and domains based on their resume. Do not include any other information. Also make sure you only highlight prominent skills.
 
@@ -45,11 +46,7 @@ def skill_domain_from_txt(text,model):
     output = response.text.strip().split('\n')
     return output
 
-
-
-
 def similarity_score(tup1,tup2):
-
     skill_similarity = cosine_similarity([tup1[0]], [tup2[0]])
     domain_similarity = cosine_similarity([tup1[1]], [tup2[1]])
 
@@ -57,3 +54,28 @@ def similarity_score(tup1,tup2):
 
     return similarity
 
+def compute_infoSource_pair(source1,source2):
+    if(len(source1)==2 and len(source2)==2):
+        return similarity_score(source1,source2)[0][0]
+    elif (len(source1)==2):
+        return max(cosine_similarity([source1[0]],[source2]),cosine_similarity([source1[1]],[source2]))[0][0]
+    elif (len(source2)==2):
+        return max(cosine_similarity([source1],[source2[0]]),cosine_similarity([source1],[source2[1]]))[0][0]
+    else:
+        return cosine_similarity([source1],[source2])[0][0]
+
+
+def generate_embeddings(string,model=emb_model):
+    embeddings = model.encode(string)
+    return embeddings.tolist()
+
+def process_resume_cv(pdf_data):
+    text=extract_text_from_pdf(pdf_data)
+    skill_domain=skill_domain_from_txt(text)
+    emb=[generate_embeddings(skill_domain[0]),generate_embeddings(skill_domain[1])]
+    return emb
+
+def process_gscholar(url):
+    domain=gscholar_scraper(url)
+    emb=generate_embeddings(domain)
+    return emb
