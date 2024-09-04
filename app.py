@@ -37,8 +37,8 @@ class Candidate(db.Model):
 
 
 # Create the database tables
-with app.app_context():
-    db.create_all()
+#with app.app_context():
+#    db.create_all()
 
 
 @app.template_filter('b64encode')
@@ -55,7 +55,8 @@ def index():
 @app.route('/dashboard')
 def dashboard():
     experts = Expert.query.all()
-    return render_template("dashboard.html",experts=experts)
+    candidates = Candidate.query.all()
+    return render_template("dashboard.html",experts=experts,candidates=candidates)
 
 @app.route('/logout')
 def logout():
