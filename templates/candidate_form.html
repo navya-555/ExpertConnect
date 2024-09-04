@@ -4,121 +4,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candidate Login Form</title>
+    <title>Candidate Form</title>
     <link href="static/css/candidate_form.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
     <div class="form-container">
-        <!-- Personal Details Section -->
-        <div class="form-section">
-            <h2 class="section-title">Personal Details</h2>
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+        <form action="/add_candidate" method="POST" enctype="multipart/form-data">
+            <!-- Personal Details Section -->
+            <div class="form-section">
+                <h2 class="section-title">Personal Details</h2>
+                <div class="form-group">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Your Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Your Phone:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone:</label>
-                <input type="tel" id="phone" name="phone" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-        </div>
 
-        <!-- Document Uploads Section -->
-        <div class="form-section">
-            <h2 class="section-title">Document Uploads</h2>
-            <div class="form-group">
-                <label for="photo">Photo:</label>
-                <input type="file" id="photo" name="photo" accept="image/*" required>
+            <!-- Document Uploads Section -->
+            <div class="form-section">
+                <h2 class="section-title">Document Uploads</h2>
+                <div class="form-group">
+                    <label for="photo">Your Photo:</label>
+                    <input type="file" id="photo" name="photo" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label for="resume">Your Resume:</label>
+                    <input type="file" id="resume" name="resume" accept=".pdf, .docx" required>
+                </div>
+                <div class="form-group">
+                    <label for="cv">Your CV:</label>
+                    <input type="file" id="cv" name="cv" accept=".pdf, .docx">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="resume">Resume:</label>
-                <input type="file" id="resume" name="resume" accept=".pdf, .docx" required>
-            </div>
-            <div class="form-group">
-                <label for="cv">CV:</label>
-                <input type="file" id="cv" name="cv" accept=".pdf, .docx">
-            </div>
-        </div>
 
-        <!-- Online Profiles Section -->
-        <div class="form-section">
-            <h2 class="section-title">Online Profiles</h2>
-            <div class="form-group">
-                <label for="google-scholar">Google Scholar Link:</label>
-                <input type="url" id="google-scholar" name="google-scholar">
+            <!-- Online Profiles Section -->
+            <div class="form-section">
+                <h2 class="section-title">Online Profiles</h2>
+                <div class="form-group">
+                    <label for="google-scholar">Google Scholar Link:</label>
+                    <input type="url" id="google-scholar" name="google-scholar">
+                </div>
+                <div class="form-group">
+                    <label for="github">GitHub Link:</label>
+                    <input type="url" id="github" name="github">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="github">GitHub Link:</label>
-                <input type="url" id="github" name="github">
-            </div>
-        </div>
 
-        <div class="form-group text-center">
-            <button type="submit" class="submit-button" onclick="validateForm(event)">Submit</button>
-        </div>
+            <div class="form-group text-center">
+                <button type="submit" class="submit-button">Submit</button>
+            </div>
+        </form>
     </div>
-
-    <script>
-        function validateForm(event) {
-            event.preventDefault();
-
-            const username = document.getElementById("username").value.trim();
-            const name = document.getElementById("name").value.trim();
-            const phone = document.getElementById("phone").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const photo = document.getElementById("photo").value;
-            const resume = document.getElementById("resume").value;
-            const cv = document.getElementById("cv").value;
-
-            const phonePattern = /^[0-9]{10}$/;
-            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-
-            if (!username) {
-                alert("Please enter your username.");
-                return;
-            }
-
-            if (!name) {
-                alert("Please enter your full name.");
-                return;
-            }
-
-            if (!phonePattern.test(phone)) {
-                alert("Please enter a valid 10-digit phone number.");
-                return;
-            }
-
-            if (!emailPattern.test(email)) {
-                alert("Please enter a valid email address.");
-                return;
-            }
-
-            if (!photo) {
-                alert("Please upload your photo.");
-                return;
-            }
-
-            if (!resume) {
-                alert("Please upload your resume.");
-                return;
-            }
-
-            alert("Form submitted successfully!");
-        }
-    </script>
-
 </body>
 
 </html>

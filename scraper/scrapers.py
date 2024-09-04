@@ -2,8 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 
 # Returns domain names from given Google Scholar profile page as a string
-def gscholar_scraper(url, headers={'User-Agent':'Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5387.128 Safari/537.36'}
-):
+def gscholar_scraper(url, 
+                     headers={'User-Agent':'Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5387.128 Safari/537.36'}
+                        ):
     try:
         r = requests.get(url, headers = headers)
         r.raise_for_status()
@@ -17,8 +18,9 @@ def gscholar_scraper(url, headers={'User-Agent':'Mozilla/5.0 (Windows NT 11.0; W
 
 
 # Returns text from read me files of some (maximum 3) pinned repositories of given user as list of strings 
-def github_scraper(url, headers={'User-Agent':'Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5387.128 Safari/537.36'}
-):
+def github_scraper(url, 
+                   headers={'User-Agent':'Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5387.128 Safari/537.36'}
+                    ):
     try:
         r = requests.get(url, headers = headers)
         r.raise_for_status()
