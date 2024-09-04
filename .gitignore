@@ -1,5 +1,3 @@
 env
 .env
-libomp140.x86_64.dll
 miscellaneous
-resume_analyser.ipynb
