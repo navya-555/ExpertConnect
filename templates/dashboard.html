@@ -16,9 +16,9 @@
 
 <body>
     <nav>
-        <div class="logo">
+        <!-- <div class="logo">
             <h4>ExpertSelect</h4>
-        </div>
+        </div> -->
         <div class="nav-links">
             <div class="nav-item" data-target="dashboard">
                 <div class="icon">
@@ -51,7 +51,7 @@
                 </div>
                 <a href="/logout">
                     <span class="nav-item-title">Logout</span>
-                </a>   
+                </a>
             </div>
         </div>
     </nav>
@@ -59,28 +59,33 @@
         <h1>Dashboard</h1>
     </div>
     <div id="addExpert" class="page active">
-        <h1>Create New Expert</h1>
-        <form action="">
-            <div class="form-section">
-                <h1>Personal Information: </h1>
-                <div class="input">
-                    <label for="name">Your Name: </label>
-                    <input type="text" name="name" id="name" required autofocus>
+        <!-- <h1>Create New Expert</h1> -->
+        <form action="" id="expert-registration-form">
+            <div id="form-section-container">
+                <div id="header">
+                    <span>Fill up the form to</span>
+                    <h1>Register New Expert</h1>
                 </div>
-                <div class="input">
-                    <label for="username">Your username: </label>
-                    <input type="text" name="username" id="username" required>
+                <div class="form-section active">
+                    <h1>Personal Information: </h1>
+                    <div class="input">
+                        <label for="name">Your Name: </label>
+                        <input type="text" name="name" id="name" required autofocus>
+                    </div>
+                    <div class="input">
+                        <label for="username">Your username: </label>
+                        <input type="text" name="username" id="username" required>
+                    </div>
+                    <div class="input">
+                        <label for="email">Your email: </label>
+                        <input type="email" name="email" id="email" required>
+                    </div>
+                    <div class="input">
+                        <label for="phone">Your phone no.: </label>
+                        <input type="text" name="phone" id="phone" required>
+                    </div>
                 </div>
-                <div class="input">
-                    <label for="email">Your email: </label>
-                    <input type="email" name="email" id="email" required>
-                </div>
-                <div class="input">
-                    <label for="phone">Your phone no.: </label>
-                    <input type="text" name="phone" id="phone" required>
-                </div>
-            </div>
-            <div class="form-section">
+                <div class="form-section">
                 <h1>Files</h1>
                 <div class="input">
                     <label for="photo">Upload your picture: </label>
@@ -122,7 +127,13 @@
                     <input type="url" name="githubLink" id="githubLink" placeholder="https://example.com" required>
                 </div>
             </div>
-            <button>Register</button>
+            <button type="button" id="form-section-changer">Next</button>
+            </div>
+
+            <div id="form-ill">
+                <img src="../static/img/expertForm.svg" alt="">
+            </div>
+            <!-- <button>Register</button> -->
         </form>
     </div>
     <div id="viewExpert" class="page">
@@ -132,7 +143,7 @@
         <h1>View Candidates</h1>
     </div>
 
-    
+
     <script src="static/js/dashboard.js"></script>
     <script>
         function showFileName(inputElement, displayElementId) {

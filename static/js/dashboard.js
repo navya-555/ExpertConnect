@@ -4,7 +4,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const pages = document.querySelectorAll(".page");
     const nav = document.querySelector("nav");
     const navItemTitles = document.querySelectorAll(".nav-item-title");
-    console.log(pages);
+    const formSectionChanger = document.getElementById('form-section-changer');
+    const formSections = document.querySelectorAll('.form-section');
+    const form = document.getElementById('expert-registration-form');
+
+    let form_section_count = 0;
 
     // Add click event listener to each nav link
     navLinks.forEach((link, index) => {
@@ -28,32 +32,69 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
     nav.addEventListener('mouseenter', () => {
-        if (window.innerWidth <= 900) {
-            nav.classList.add('expanded');
-            navItemTitles.forEach(title => {
-                title.style.display = 'block';
-            });
-        }
+        nav.classList.add('expanded');
+        navItemTitles.forEach(title => {
+            title.style.display = 'block';
+        });
     });
 
     nav.addEventListener('mouseleave', () => {
-        if(window.innerWidth <= 900) {
-            nav.classList.remove('expanded');
-            navItemTitles.forEach(title => {
-                title.style.display = 'none';
-            });
-        }
+        nav.classList.remove('expanded');
+        navItemTitles.forEach(title => {
+            title.style.display = 'none';
+        });
     });
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 900) {
-            nav.classList.remove('expanded');
-            navItemTitles.forEach(title => {
-                title.style.display = '';
-            });
+    // window.addEventListener('resize', () => {
+    //     if (window.innerWidth > 900) {
+    //         nav.classList.remove('expanded');
+    //         navItemTitles.forEach(title => {
+    //             title.style.display = '';
+    //         });
+    //     } else {
+    //         navItemTitles.forEach(title => {
+    //             title.style.display = 'none';
+    //         });
+    //     }
+    // });
+
+    formSectionChanger.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // Get all required inputs in the current section
+        const currentSection = formSections[form_section_count];
+        const requiredFields = currentSection.querySelectorAll('[required]');
+
+
+        // Validate the fields
+        let allValid = true;
+        requiredFields.forEach(input => {
+            if (!input.value) {
+                allValid = false;
+                input.classList.add('error'); // Add an error class if empty
+            } else {
+                input.classList.remove('error'); // Remove error if valid
+            }
+        });
+
+        // If all fields are valid, go to the next section
+        if (allValid) {
+            // If it's the last section, change button to "Submit"
+            if (form_section_count === formSections.length - 1) {
+                // Submit the form
+                form.submit();
+            } else {
+                // Go to the next section
+                formSections[form_section_count].classList.remove('active');
+                form_section_count++;
+                formSections[form_section_count].classList.add('active');
+
+                // Check if we are on the last section now
+                if (form_section_count === formSections.length - 1) {
+                    formSectionChanger.textContent = "Submit";
+                }
+            }
         } else {
-            navItemTitles.forEach(title => {
-                title.style.display = 'none';
-            });
+            alert("Please fill out all required fields.");
         }
     });
 
