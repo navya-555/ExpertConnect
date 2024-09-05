@@ -13,18 +13,18 @@ body {
 }
 
 nav {
-    width: 235px;
+    /* width: 235px; */
     height: 100vh;
     background-color: #202a36;
-    @media screen and (max-width: 900px) {
-        width: 60px;
-        position: fixed;
-        z-index: 1;
-        transition: all 0.2s;
-        top: 0;
-        left: 0;
-    }
-    div.logo {
+    /* @media screen and (max-width: 900px) { */
+    width: 60px;
+    position: fixed;
+    z-index: 1;
+    transition: all 0.2s;
+    top: 0;
+    left: 0;
+    /* } */
+    /* div.logo {
         cursor: default;
         width: 100%;
         height: 60px;
@@ -39,7 +39,7 @@ nav {
         @media screen and (max-width: 900px) {
             visibility: hidden;
         }
-    }
+    } */
     div.nav-links {
         margin-top: 20px;
         padding: 0;
@@ -91,6 +91,7 @@ nav {
             span {
                 flex: 1 1 auto;
                 white-space: nowrap;
+                display: none;
                 @media screen and (max-width: 900px) {
                     display: none;
                 }
@@ -108,9 +109,9 @@ div.page {
     background-size: cover;
     display: none;
     overflow-x: hidden;
-    @media screen and (max-width: 900px) {
-        margin-left: 60px;
-    }
+    /* @media screen and (max-width: 900px) { */
+    margin-left: 60px;
+    /* } */
     @media screen and (max-width: 520px) {
         padding: 30px 0px;
     }
@@ -119,144 +120,181 @@ div.page {
 div#addExpert {
     flex-direction: column;
     align-items: center;
-    h1 {
-        font-family: "Roboto Slab", serif;
-        font-size: 45px;
-        color: #202a36;
-        margin: 0px;
-        margin-bottom: 5px;
-        @media screen and (max-width: 768px) {
-            font-size: 35px;
-            margin-bottom: 20px;
-        }
-        @media screen and (max-width: 520px) {
-            font-size: 26px;
-        }
+    justify-content: center;
+    background-image: url(../img/expertFromBg2.png);
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(2px);
+        background-color: rgba(0, 0, 0, 0.1);
     }
     form {
         display: flex;
-        width: 100%;
-        flex-direction: column;
+        z-index: 2;
+        /* width: 100%; */
+        min-height: 500px;
+        align-items: center;
+        justify-content: center;
         gap: 20px;
-        padding: 0px 30px;
-        div.form-section {
+        padding: 30px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 10px 10px #202a36;
+        border: 2px solid #202a36;
+        div#form-section-container {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
             gap: 10px;
-            width: 100%;
-            @media screen and (max-width: 520px) {
-                gap: 20px;
-                align-items: center;
-            }
-            h1 {
-                font-family: "Titillium Web", sans-serif;
-                font-size: 30px;
-                color: #202a36;
-                text-decoration: underline;
-                text-underline-offset: 4px;
+            align-items: center;
+            div#header {
                 align-self: flex-start;
-                @media screen and (max-width: 768px) {
-                    font-size: 22px;
-                }
-                @media screen and (max-width: 520px) {
-                    font-size: 18px;
-                }
-            }
-            div.input {
-                display: flex;
-                margin-left: 50px;
-                align-items: center;
-                @media screen and (max-width: 768px) {
-                    margin-left: 20px;
-                }
-                @media screen and (max-width: 520px) {
-                    flex-direction: column;
-                    gap: 5px;
-                    align-items: flex-start;
-                    width: 90%;
-                    margin-left: 0px;
-                }
-                label {
-                    font-family: "Suse", sans-serif;
-                    font-weight: 600;
-                    font-size: 18px;
-                    color: #202a36;
-                    width: 250px;
-                    @media screen and (max-width: 768px) {
-                        font-size: 15px;
-                        width: 180px;
-                    }
-                }
-                input {
-                    padding: 8px 15px;
-                    border-radius: 5px;
-                    border: none;
-                    outline: none;
-                    font-size: larger;
-                    font-family: "Suse";
-                    @media screen and (max-width: 768px) {
-                        padding: 5px 10px;
-                    }
-                    &:focus {
-                        outline: 2px solid #202a36;
-                        outline-offset: 3px;
-                    }
-                    @media screen and (max-width: 768px) {
-                        font-size: 16px;
-                    }
-                    @media screen and (max-width: 520px) {
-                        width: 100%;
-                        padding: 8px 15px;
-                    }
-                }
                 span {
                     font-family: "Suse", sans-serif;
-                    font-size: 16px;
+                    font-size: 20px;
+                    font-weight: 700;
                     color: #202a36;
-                    padding: 5px 10px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
+                }
+                h1 {
+                    font-family: "Titillium Web";
+                    font-size: 40px;
+                    margin: 0px;
+                }
+            }
+            div.form-section {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                display: none;
+                /* width: 100%; */
+                @media screen and (max-width: 520px) {
+                    gap: 20px;
+                    align-items: center;
+                }
+                h1 {
+                    font-family: "Titillium Web", sans-serif;
+                    font-size: 25px;
+                    color: #202a36;
+                    text-decoration: underline;
+                    text-underline-offset: 4px;
+                    align-self: flex-start;
                     @media screen and (max-width: 768px) {
-                        font-size: 15px;
-                        max-width: 100px;
+                        font-size: 22px;
                     }
                     @media screen and (max-width: 520px) {
-                        max-width: 230px;
+                        font-size: 18px;
                     }
                 }
-                div.fileInputContainer {
-                    border: 2px solid #202a36;
-                    border-radius: 5px;
-                    padding: 5px 10px;
-                    position: relative;
-                    overflow: hidden;
-                    font-family: "Suse", sans-serif;
-                    &:hover {
-                        background-color: #202a36;
-                        color: white;
+                div.input {
+                    display: flex;
+                    align-items: center;
+                    @media screen and (max-width: 768px) {
+                        margin-left: 20px;
                     }
                     @media screen and (max-width: 520px) {
-                        width: 100%;
-                        text-align: center;
+                        flex-direction: column;
+                        gap: 5px;
+                        align-items: flex-start;
+                        width: 90%;
+                        margin-left: 0px;
                     }
-                    p {
-                        margin: 0;
-                        white-space: nowrap;
+                    label {
+                        font-family: "Suse", sans-serif;
+                        font-weight: 600;
+                        font-size: 18px;
+                        color: #202a36;
+                        width: 200px;
                         @media screen and (max-width: 768px) {
-                            font-size: 13px;
-                        }
-                        @media screen and (max-width: 520px) {
                             font-size: 15px;
+                            width: 180px;
                         }
                     }
                     input {
-                        transform: scale(5);
-                        opacity: 0;
-                        position: absolute;
+                        padding: 8px 15px;
+                        border-radius: 3px;
+                        border: none;
+                        outline: none;
+                        font-size: larger;
+                        font-family: "Suse";
+                        box-shadow: 5px 5px #202a36;
+                        border: 2px solid #202a36;
+                        @media screen and (max-width: 768px) {
+                            padding: 5px 10px;
+                        }
+                        &:focus {
+                            background-color: aliceblue;
+                        }
+                        @media screen and (max-width: 768px) {
+                            font-size: 16px;
+                        }
+                        @media screen and (max-width: 520px) {
+                            width: 100%;
+                            padding: 8px 15px;
+                        }
+                    }
+                    span {
+                        font-family: "Suse", sans-serif;
+                        font-size: 16px;
+                        color: #202a36;
+                        padding: 5px 10px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        max-width: 130px;
+                        @media screen and (max-width: 768px) {
+                            font-size: 15px;
+                            max-width: 100px;
+                        }
+                        @media screen and (max-width: 520px) {
+                            max-width: 230px;
+                        }
+                    }
+                    div.fileInputContainer {
+                        border: 2px solid #202a36;
+                        border-radius: 5px;
+                        padding: 5px 10px;
+                        position: relative;
+                        overflow: hidden;
+                        font-family: "Suse", sans-serif;
+                        &:hover {
+                            background-color: #202a36;
+                            color: white;
+                        }
+                        &:has(.error) {
+                            border: 2px solid red;
+                        }
+                        @media screen and (max-width: 520px) {
+                            width: 100%;
+                            text-align: center;
+                        }
+                        p {
+                            margin: 0;
+                            white-space: nowrap;
+                            @media screen and (max-width: 768px) {
+                                font-size: 13px;
+                            }
+                            @media screen and (max-width: 520px) {
+                                font-size: 15px;
+                            }
+                        }
+                        input {
+                            transform: scale(5);
+                            opacity: 0;
+                            position: absolute;
+                        }
                     }
                 }
+            }
+        }
+        div#form-ill {
+            height: 100%;
+            img {
+                width: 100%;
+                height: 100%;
             }
         }
         button {
@@ -268,8 +306,8 @@ div#addExpert {
             font-size: 18px;
             font-family: "Suse";
             cursor: pointer;
+            margin-top: 20px;
             width: fit-content;
-            margin-left: auto;
             transition: all 0.3s;
             &:hover {
                 background-color: #2c3e50;
@@ -282,8 +320,25 @@ div#addExpert {
     }
 }
 
+@keyframes slide {
+    from {
+        transform: translateX(20%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+.error {
+    border: 2px solid red !important;
+    /* box-shadow: 5px 5px red !important; */
+}
+
 .active {
     display: flex !important;
+    animation: slide 0.5s;
 }
 
 .expanded {
