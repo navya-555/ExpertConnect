@@ -17,9 +17,14 @@ document.addEventListener("DOMContentLoaded", function () {
             link.addEventListener("click", function (e) {
                 e.preventDefault(); // Prevent default anchor click behavior
 
+                //adding styles for active nav item
+                navLinks.forEach(link => {
+                    link.classList.remove('active-nav-item');
+                });
+                this.classList.add('active-nav-item');
+
                 // Get the target page from the data-target attribute
                 const targetPage = this.getAttribute("data-target");
-                console.log(targetPage);
 
                 // Hide all pages
                 pages.forEach(page => {
