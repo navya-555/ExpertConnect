@@ -218,7 +218,9 @@ def fetch_candidate():
     
     experts_scores=sorted(experts_scores, key=lambda x: x[1], reverse=True)
 
-    return render_template("dashboard.html",experts=None,candidates=None,experts_scores=experts_scores)
+    experts = Expert.query.all()
+    candidates = Candidate.query.all()
+    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=None)
 
 def process_expert(user_name):
     with app.app_context():
