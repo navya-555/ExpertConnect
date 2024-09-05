@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Get the target page from the data-target attribute
                 const targetPage = this.getAttribute("data-target");
+                console.log(targetPage);
 
                 // Hide all pages
                 pages.forEach(page => {
@@ -27,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Show the selected page
                 const selectedPage = document.getElementById(targetPage);
+                console.log(selectedPage);
                 selectedPage.classList.add("active");
             });
         }
@@ -44,18 +46,6 @@ document.addEventListener("DOMContentLoaded", function () {
             title.style.display = 'none';
         });
     });
-    // window.addEventListener('resize', () => {
-    //     if (window.innerWidth > 900) {
-    //         nav.classList.remove('expanded');
-    //         navItemTitles.forEach(title => {
-    //             title.style.display = '';
-    //         });
-    //     } else {
-    //         navItemTitles.forEach(title => {
-    //             title.style.display = 'none';
-    //         });
-    //     }
-    // });
 
     formSectionChanger.addEventListener('click', (e) => {
         e.preventDefault();

@@ -59,85 +59,9 @@
     <div id="dashboard" class="page active">
         <h1>Dashboard</h1>
     </div>
-    <div id="addExpert" class="page active">
+    <div id="addExpert" class="page">
         {% include 'add_expert.html' %}
-        <form action="" id="expert-registration-form">
-            <div id="form-section-container">
-                <div id="header">
-                    <span>Fill up the form to</span>
-                    <h1>Register New Expert</h1>
-                </div>
-                <div class="form-section active">
-                    <h1>Personal Information: </h1>
-                    <div class="input">
-                        <label for="name">Your Name: </label>
-                        <input type="text" name="name" id="name" required autofocus>
-                    </div>
-                    <div class="input">
-                        <label for="username">Your username: </label>
-                        <input type="text" name="username" id="username" required>
-                    </div>
-                    <div class="input">
-                        <label for="email">Your email: </label>
-                        <input type="email" name="email" id="email" required>
-                    </div>
-                    <div class="input">
-                        <label for="phone">Your phone no.: </label>
-                        <input type="text" name="phone" id="phone" required>
-                    </div>
-                </div>
-                <div class="form-section">
-                <h1>Files</h1>
-                <div class="input">
-                    <label for="photo">Upload your picture: </label>
-                    <div class="fileInputContainer">
-                        <p>Upload from memory</p>
-                        <input type="file" name="photo" accept="image/jpg, image/jpeg, image/png" id="photo"
-                            onchange="showFileName(this, 'photo-file-name')" required>
-                    </div>
-                    <span id="photo-file-name">No file chosen</span>
-                </div>
-                <div class="input">
-                    <label for="resume">Upload your resume: </label>
-                    <div class="fileInputContainer">
-                        <p>Upload from memory</p>
-                        <input type="file" accept="application/pdf" name="resume" id="resume"
-                            onchange="showFileName(this, 'resume-file-name')" required>
-                    </div>
-                    <span id="resume-file-name">No file chosen</span>
-                </div>
-                <div class="input">
-                    <label for="cv">Upload your CV: </label>
-                    <div class="fileInputContainer">
-                        <p>Upload from memory</p>
-                        <input type="file" accept="application/pdf" name="cv" id="cv"
-                            onchange="showFileName(this, 'cv-file-name')" required>
-                    </div>
-                    <span id="cv-file-name">No file chosen</span>
-                </div>
-            </div>
-            <div class="form-section">
-                <h1>Links</h1>
-                <div class="input">
-                    <label for="googleScholarLink">Google Scholar Link:</label>
-                    <input type="url" name="googleScholarLink" id="googleScholarLink" placeholder="https://example.com"
-                        required>
-                </div>
-                <div class="input">
-                    <label for="githubLink">Github Profile Link:</label>
-                    <input type="url" name="githubLink" id="githubLink" placeholder="https://example.com" required>
-                </div>
-            </div>
-            <button type="button" id="form-section-changer">Next</button>
-            </div>
-
-            <div id="form-ill">
-                <img src="../static/img/expertForm.svg" alt="">
-            </div>
-            <!-- <button>Register</button> -->
-        </form>
     <div id="viewExpert" class="page">
-
         {% if experts %}
         <table>
             <thead>
