@@ -65,23 +65,26 @@
     <div id="viewExpert" class="page">
 
         {% if experts %}
+        <!-- <h2 class="table-heading">Experts Information</h2> -->
         <table>
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Google Scholar</th>
-                    <th>GitHub</th>
-                    <th>Photo</th>
-                    <th>Resume</th>
-                    <th>CV</th>
+                    <th class="bordered">Sno</th>
+                    <th class="bordered">Name</th>
+                    <th class="bordered">Username</th>
+                    <th class="bordered">Email</th>
+                    <th class="bordered">Phone</th>
+                    <th class="bordered">Google Scholar</th>
+                    <th class="bordered">GitHub</th>
+                    <th class="bordered">Photo</th>
+                    <th class="bordered">Resume</th>
+                    <th class="bordered">CV</th>
                 </tr>
             </thead>
             <tbody>
                 {% for expert in experts %}
                 <tr>
+                    <td>{{loop.index}}</td>
                     <td>{{ expert.name }}</td>
                     <td>{{ expert.username }}</td>
                     <td>{{ expert.email }}</td>
@@ -131,27 +134,30 @@
         {% else %}
         <p>No experts registered.</p>
         {% endif %}
-
     </div>
+
     <div id="viewCandidates" class="page">
         {% if candidates %}
+        <!-- <h2 class="table-heading">Candidates Information</h2> -->
         <table>
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Google Scholar</th>
-                    <th>GitHub</th>
-                    <th>Photo</th>
-                    <th>Resume</th>
-                    <th>CV</th>
+                    <th class="bordered">Sno</th>
+                    <th class="bordered">Name</th>
+                    <th class="bordered">Username</th>
+                    <th class="bordered">Email</th>
+                    <th class="bordered">Phone</th>
+                    <th class="bordered">Google Scholar</th>
+                    <th class="bordered">GitHub</th>
+                    <th class="bordered">Photo</th>
+                    <th class="bordered">Resume</th>
+                    <th class="bordered">CV</th>
                 </tr>
             </thead>
             <tbody>
                 {% for candidate in candidates %}
                 <tr>
+                    <td>{{loop.index}}</td>
                     <td>{{ candidate.name }}</td>
                     <td>{{ candidate.username }}</td>
                     <td>{{ candidate.email }}</td>
@@ -166,8 +172,7 @@
                     </td>
                     <td>
                         {% if candidate.github_link %}
-                        <a href="{{ candidate.github_link }}" target="_blank"> <i class="fa-regular fa-eye"></i>
-                            View</a>
+                        <a href="{{ candidate.github_link }}" target="_blank"> <i class="fa-regular fa-eye"></i> View</a>
                         {% else %}
                         N/A
                         {% endif %}
@@ -204,7 +209,6 @@
         {% endif %}
     </div>
 
-
     <script src="static/js/dashboard.js"></script>
     <script>
         function showFileName(inputElement, displayElementId) {
@@ -215,5 +219,4 @@
         }
     </script>
 </body>
-
 </html>
