@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,200,300,regular,500,600,700,800,900"
         rel="stylesheet" />
     <link rel="stylesheet" href="static/css/dashboard.css">
+    <script src="https://kit.fontawesome.com/ec53c9ed31.js" crossorigin="anonymous"></script>
     <title>ExpertSelect</title>
 </head>
 
@@ -51,15 +52,15 @@
                 </div>
                 <a href="/logout">
                     <span class="nav-item-title">Logout</span>
-                </a>
+                </a>   
             </div>
         </div>
     </nav>
-    <div id="dashboard" class="page">
+    <div id="dashboard" class="page active">
         <h1>Dashboard</h1>
     </div>
     <div id="addExpert" class="page active">
-        <!-- <h1>Create New Expert</h1> -->
+        {% include 'add_expert.html' %}
         <form action="" id="expert-registration-form">
             <div id="form-section-container">
                 <div id="header">
@@ -135,12 +136,146 @@
             </div>
             <!-- <button>Register</button> -->
         </form>
-    </div>
     <div id="viewExpert" class="page">
-        <h1>View Experts</h1>
+
+        {% if experts %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Google Scholar</th>
+                    <th>GitHub</th>
+                    <th>Photo</th>
+                    <th>Resume</th>
+                    <th>CV</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expert in experts %}
+                <tr>
+                    <td>{{ expert.name }}</td>
+                    <td>{{ expert.username }}</td>
+                    <td>{{ expert.email }}</td>
+                    <td>{{ expert.phone }}</td>
+                    <td>
+                        {% if expert.google_scholar_link %}
+                        <a href="{{ expert.google_scholar_link }}" target="_blank"> <i class="fa-regular fa-eye"></i>
+                            View</a>
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if expert.github_link %}
+                        <a href="{{ expert.github_link }}" target="_blank"> <i class="fa-regular fa-eye"></i> View</a>
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if expert.photo %}
+                        <img src="data:image/png;base64,{{ expert.photo | b64encode }}" alt="Photo" width="100">
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if expert.resume %}
+                        <a href="data:application/pdf;base64,{{ expert.resume | b64encode }}" download="resume.pdf"><i
+                                class="fa-solid fa-file-arrow-down"></i>Download</a>
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if expert.cv %}
+                        <a href="data:application/pdf;base64,{{ expert.cv | b64encode }}" download="cv.pdf"><i
+                                class="fa-solid fa-file-arrow-down"></i>Download</a>
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No experts registered.</p>
+        {% endif %}
+
     </div>
     <div id="viewCandidates" class="page">
-        <h1>View Candidates</h1>
+        {% if candidates %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Google Scholar</th>
+                    <th>GitHub</th>
+                    <th>Photo</th>
+                    <th>Resume</th>
+                    <th>CV</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for candidate in candidates %}
+                <tr>
+                    <td>{{ candidate.name }}</td>
+                    <td>{{ candidate.username }}</td>
+                    <td>{{ candidate.email }}</td>
+                    <td>{{ candidate.phone }}</td>
+                    <td>
+                        {% if candidate.google_scholar_link %}
+                        <a href="{{ candidate.google_scholar_link }}" target="_blank"> <i class="fa-regular fa-eye"></i>
+                            View</a>
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if candidate.github_link %}
+                        <a href="{{ candidate.github_link }}" target="_blank"> <i class="fa-regular fa-eye"></i>
+                            View</a>
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if candidate.photo %}
+                        <img src="data:image/png;base64,{{ candidate.photo | b64encode }}" alt="Photo" width="100">
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if candidate.resume %}
+                        <a href="data:application/pdf;base64,{{ candidate.resume | b64encode }}"
+                            download="resume.pdf"><i class="fa-solid fa-file-arrow-down"></i> Download</a>
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if candidate.cv %}
+                        <a href="data:application/pdf;base64,{{ candidate.cv | b64encode }}" download="cv.pdf"><i
+                                class="fa-solid fa-file-arrow-down"></i> Download</a>
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No candidates registered.</p>
+        {% endif %}
     </div>
 
 

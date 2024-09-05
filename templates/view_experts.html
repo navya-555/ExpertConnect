@@ -1,0 +1,68 @@
+
+
+<h1>Registered Experts</h1>
+
+{% if experts %}
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Google Scholar</th>
+            <th>GitHub</th>
+            <th>Photo</th>
+            <th>Resume</th>
+            <th>CV</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for expert in experts %}
+        <tr>
+            <td>{{ expert.full_name }}</td>
+            <td>{{ expert.username }}</td>
+            <td>{{ expert.email }}</td>
+            <td>{{ expert.phone }}</td>
+            <td>
+                {% if expert.google_scholar_link %}
+                <a href="{{ expert.google_scholar_link }}" target="_blank">View</a>
+                {% else %}
+                N/A
+                {% endif %}
+            </td>
+            <td>
+                {% if expert.github_link %}
+                <a href="{{ expert.github_link }}" target="_blank">View</a>
+                {% else %}
+                N/A
+                {% endif %}
+            </td>
+            <td>
+                {% if expert.photo %}
+                <img src="data:image/png;base64,{{ expert.photo | b64encode }}" alt="Photo" width="100">
+                {% else %}
+                N/A
+                {% endif %}
+            </td>
+            <td>
+                {% if expert.resume %}
+                <a href="data:application/pdf;base64,{{ expert.resume | b64encode }}" download="resume.pdf">Download</a>
+                {% else %}
+                N/A
+                {% endif %}
+            </td>
+            <td>
+                {% if expert.cv %}
+                <a href="data:application/pdf;base64,{{ expert.cv | b64encode }}" download="cv.pdf">Download</a>
+                {% else %}
+                N/A
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No experts registered.</p>
+{% endif %}

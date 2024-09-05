@@ -1,0 +1,64 @@
+<h1>Add New Expert</h1>
+        <form action="/add_expert" method="POST" enctype="multipart/form-data">
+            <div class="form-section">
+                <h1>Personal Information: </h1>
+                <div class="input">
+                    <label for="name">Name: </label>
+                    <input type="text" name="full_name" id="name" required autofocus>
+                </div>
+                <div class="input">
+                    <label for="username">username: </label>
+                    <input type="text" name="username" id="username" required>
+                </div>
+                <div class="input">
+                    <label for="email">email: </label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div class="input">
+                    <label for="phone">phone no.: </label>
+                    <input type="text" name="phone" id="phone" required>
+                </div>
+            </div>
+            <div class="form-section">
+                <h1>Files</h1>
+                <div class="input">
+                    <label for="photo">Upload picture:* </label>
+                    <div class="fileInputContainer">
+                        <p>Upload from memory</p>
+                        <input type="file" name="photo" accept="image/jpg, image/jpeg, image/png" id="photo"
+                            onchange="showFileName(this, 'photo-file-name')" required>
+                    </div>
+                    <span id="photo-file-name">No file chosen</span>
+                </div>
+                <div class="input">
+                    <label for="resume">Upload your resume:* </label>
+                    <div class="fileInputContainer">
+                        <p>Upload from memory</p>
+                        <input type="file" accept="application/pdf" name="resume" id="resume"
+                            onchange="showFileName(this, 'resume-file-name')" required>
+                    </div>
+                    <span id="resume-file-name">No file chosen</span>
+                </div>
+                <div class="input">
+                    <label for="cv">Upload your CV: </label>
+                    <div class="fileInputContainer">
+                        <p>Upload from memory</p>
+                        <input type="file" accept="application/pdf" name="cv" id="cv"
+                            onchange="showFileName(this, 'cv-file-name')" >
+                    </div>
+                    <span id="cv-file-name">No file chosen</span>
+                </div>
+            </div>
+            <div class="form-section">
+                <h1>Links</h1>
+                <div class="input">
+                    <label for="googleScholarLink">Google Scholar Link:</label>
+                    <input type="url" name="googleScholarLink" id="googleScholarLink" placeholder="https://example.com">
+                </div>
+                <div class="input">
+                    <label for="githubLink">Github Profile Link:</label>
+                    <input type="url" name="githubLink" id="githubLink" placeholder="https://example.com">
+                </div>
+            </div>
+            <button>Register</button>
+        </form>
