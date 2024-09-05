@@ -355,10 +355,9 @@ a span {
 }
 
 
-
-
 /* Center the text in the table headers */
-#viewExpert table {
+#viewExpert table, 
+#viewCandidates table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
@@ -367,27 +366,34 @@ a span {
 }
 
 #viewExpert th, 
-#viewExpert td {
+#viewCandidates th, 
+#viewExpert td, 
+#viewCandidates td {
     padding: 12px 15px;
     text-align: center; /* Center-aligns all content inside table headers and data cells */
 }
 
-#viewExpert th {
+#viewExpert th, 
+#viewCandidates th {
     background-color: #f4f4f4;
     font-weight: bold;
+    
 }
 
-#viewExpert td {
+#viewExpert td, 
+#viewCandidates td {
     border: 1px solid #ddd;
 }
 
-#viewExpert table img {
+#viewExpert table img,
+#viewCandidates table img {
     max-width: 100px;
     border-radius: 5px;
 }
 
 /* Style the anchor tags */
-#viewExpert a {
+#viewExpert a, 
+#viewCandidates a {
     color: black;  /* Set the text color to black */
     text-decoration: none; /* Remove underline from links */
     font-weight: bold;
@@ -395,10 +401,37 @@ a span {
     align-items: center;
 }
 
-
 /* Optional: Change the color on hover */
-#viewExpert a:hover {
+#viewExpert a:hover, 
+#viewCandidates a:hover {
     color: #444;  /* Slightly lighter black */
+}
+/* Remove background image for both #viewExpert and #viewCandidates */
+#viewExpert,
+#viewCandidates {
+    background-image: none; /* Removes the background image */
 }
 
 
+/* Style for the heading above the table */
+.table-heading {
+    font-size: 24px;
+    font-family: "Roboto Slab", serif;
+    color: #202a36;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #202a36; /* Add a bottom border */
+    padding-bottom: 10px; /* Space between text and border */
+}
+
+/* Center the text in the table headers and ensure text wraps within two lines */
+#viewExpert th, 
+#viewCandidates th {
+    padding: 12px 15px;
+    text-align: center; /* Center-aligns all content inside table headers */
+    background-color: transparent; /* Make the background transparent */
+    border: 1px solid #202a36; /* Add a border around table headers */
+    max-width: 150px; /* Set a maximum width for the table headers */
+    word-wrap: break-word; /* Allows text to wrap within the column */
+    white-space: normal; /* Ensures text wraps and does not stay on one line */
+    overflow-wrap: break-word; /* Breaks long words if necessary */
+}
