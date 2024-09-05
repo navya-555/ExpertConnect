@@ -156,7 +156,7 @@ def add_expert():
         return redirect('/dashboard')
     return redirect('/')
 
-@app.route('/add_candidate', methods=['POST'])
+@app.route('/add_candidate', methods=['GET', 'POST'])
 def add_candidate():
     if request.method == 'POST':
         # Get form data
@@ -194,7 +194,8 @@ def add_candidate():
 
         # threading.Thread(target=process_candidate, args=(username,)).start()
 
-        return redirect('/')
+        return redirect('/dashboard')
+    return redirect('/')
 
 
 def process_expert(user_name):
