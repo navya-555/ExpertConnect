@@ -87,15 +87,51 @@ div.page {
     flex: 1 1 auto;
     height: 100vh;
     background-color: ghostwhite;
-    background-image: url(../img/background.svg);
+    background-image: url(../img/dashboardBg.svg);
     background-size: cover;
     display: none;
     overflow-x: hidden;
-    /* @media screen and (max-width: 900px) { */
     margin-left: 60px;
-    /* } */
     @media screen and (max-width: 520px) {
         padding: 30px 0px;
+    }
+}
+
+div#expert-matching{
+    div.fetch-username{
+        width: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* padding: 10px; */
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        border: 2px solid #202a36;
+        label{
+            display: none;
+        }
+        input{
+            border: none;
+            outline: none;
+            font-size: 1.5rem;
+            font-family: 'Suse';
+            background: transparent;
+            padding: 10px;
+        }
+        button{
+            background-color: #202a36;
+            color: white;
+            border: none;
+            height: full;
+            font-size: 1.5rem;
+            padding: 12px;
+            &:hover{
+                background-color: #2c3e50;
+                cursor: pointer;
+            }
+        }
     }
 }
 
@@ -103,17 +139,7 @@ div#addExpert {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: url(../img/expertFromBg2.png);
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        backdrop-filter: blur(2px);
-        background-color: rgba(0, 0, 0, 0.1);
-    }
+    background-image: url(../img/dashboardBg.svg);
     form {
         display: flex;
         z-index: 2;
@@ -315,7 +341,6 @@ div#addExpert {
 
 .error {
     border: 2px solid red !important;
-    /* box-shadow: 5px 5px red !important; */
 }
 
 .active-nav-item{
