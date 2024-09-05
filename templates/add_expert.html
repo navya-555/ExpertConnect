@@ -1,4 +1,4 @@
-<form action="" id="expert-registration-form">
+<form action="/add_expert" method="POST" id="expert-registration-form">
     <div id="form-section-container">
         <div id="header">
             <span>Fill up the form to</span>
@@ -7,26 +7,26 @@
         <div class="form-section active">
             <h1>Personal Information: </h1>
             <div class="input">
-                <label for="name">Your Name: </label>
-                <input type="text" name="name" id="name" required autofocus>
+                <label for="full_name">Name: </label>
+                <input type="text" name="full_name" id="full_name" required autofocus>
             </div>
             <div class="input">
-                <label for="username">Your username: </label>
+                <label for="username">Username: </label>
                 <input type="text" name="username" id="username" required>
             </div>
             <div class="input">
-                <label for="email">Your email: </label>
+                <label for="email">Email: </label>
                 <input type="email" name="email" id="email" required>
             </div>
             <div class="input">
-                <label for="phone">Your phone no.: </label>
-                <input type="text" name="phone" id="phone" required>
+                <label for="phone">Phone no.: </label>
+                <input type="text" name="phone" id="phone" >
             </div>
         </div>
         <div class="form-section">
             <h1>Files</h1>
             <div class="input">
-                <label for="photo">Upload your picture: </label>
+                <label for="photo">Upload your picture:*</label>
                 <div class="fileInputContainer">
                     <p>Upload from memory</p>
                     <input type="file" name="photo" accept="image/jpg, image/jpeg, image/png" id="photo"
@@ -35,7 +35,7 @@
                 <span id="photo-file-name">No file chosen</span>
             </div>
             <div class="input">
-                <label for="resume">Upload your resume: </label>
+                <label for="resume">Upload your resume:* </label>
                 <div class="fileInputContainer">
                     <p>Upload from memory</p>
                     <input type="file" accept="application/pdf" name="resume" id="resume"
@@ -48,7 +48,7 @@
                 <div class="fileInputContainer">
                     <p>Upload from memory</p>
                     <input type="file" accept="application/pdf" name="cv" id="cv"
-                        onchange="showFileName(this, 'cv-file-name')" required>
+                        onchange="showFileName(this, 'cv-file-name')" >
                 </div>
                 <span id="cv-file-name">No file chosen</span>
             </div>
@@ -57,19 +57,18 @@
             <h1>Links</h1>
             <div class="input">
                 <label for="googleScholarLink">Google Scholar Link:</label>
-                <input type="url" name="googleScholarLink" id="googleScholarLink" placeholder="https://example.com"
-                    required>
+                <input type="url" name="googleScholarLink" id="googleScholarLink" placeholder="https://example.com">
             </div>
             <div class="input">
                 <label for="githubLink">Github Profile Link:</label>
-                <input type="url" name="githubLink" id="githubLink" placeholder="https://example.com" required>
+                <input type="url" name="githubLink" id="githubLink" placeholder="https://example.com">
             </div>
         </div>
         <button type="button" id="form-section-changer">Next</button>
     </div>
 
     <div id="form-ill">
-        <img src="../static/img/expertForm.svg" alt="">
+        <img src="/static/img/expertForm.svg" alt="">
     </div>
     <!-- <button>Register</button> -->
 </form>

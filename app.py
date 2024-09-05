@@ -154,7 +154,7 @@ def add_expert():
 
         # Redirect to dashboard or any other page
         return redirect('/dashboard')
-
+    return redirect('/')
 
 @app.route('/add_candidate', methods=['POST'])
 def add_candidate():

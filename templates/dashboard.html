@@ -52,7 +52,7 @@
                 </div>
                 <a href="/logout">
                     <span class="nav-item-title">Logout</span>
-                </a>   
+                </a>
             </div>
         </div>
     </nav>
@@ -61,6 +61,7 @@
     </div>
     <div id="addExpert" class="page">
         {% include 'add_expert.html' %}
+    </div>
     <div id="viewExpert" class="page">
         {% if experts %}
         <table>
@@ -94,7 +95,8 @@
                     </td>
                     <td>
                         {% if expert.github_link %}
-                        <a href="{{ expert.github_link }}" target="_blank"> <i class="fa-regular fa-eye"></i> View</a>
+                        <a href="{{ expert.github_link }}" target="_blank"> <i class="fa-regular fa-eye"></i>
+                            View</a>
                         {% else %}
                         N/A
                         {% endif %}
