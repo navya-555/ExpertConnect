@@ -51,7 +51,6 @@ def similarity_score(tup1,tup2):
     domain_similarity = cosine_similarity([tup1[1]], [tup2[1]])
 
     similarity = (0.4 * skill_similarity) + (0.6 * domain_similarity)
-
     return similarity
 
 def compute_infoSource_pair(source1,source2):
