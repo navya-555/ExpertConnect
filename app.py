@@ -220,7 +220,7 @@ def fetch_candidate():
 
     experts = Expert.query.all()
     candidates = Candidate.query.all()
-    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=None)
+    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=experts_scores)
 
 def process_expert(user_name):
     with app.app_context():
