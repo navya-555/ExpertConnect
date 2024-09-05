@@ -97,40 +97,219 @@ div.page {
     }
 }
 
-div#expert-matching{
-    div.fetch-username{
+div#expert-match {
+    flex-direction: column;
+    padding: 30px;
+    overflow-y: auto;
+
+    form {
         width: fit-content;
         display: flex;
-        justify-content: center;
+        z-index: 2;
         align-items: center;
-        /* padding: 10px; */
+        justify-content: center;
+        gap: 50px;
+        padding: 30px;
         background-color: white;
         border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        box-shadow: 10px 10px #202a36;
         border: 2px solid #202a36;
-        label{
-            display: none;
-        }
-        input{
-            border: none;
-            outline: none;
-            font-size: 1.5rem;
-            font-family: 'Suse';
-            background: transparent;
-            padding: 10px;
-        }
-        button{
-            background-color: #202a36;
-            color: white;
-            border: none;
-            height: full;
-            font-size: 1.5rem;
-            padding: 12px;
-            &:hover{
-                background-color: #2c3e50;
-                cursor: pointer;
+        div.header {
+            display: flex;
+            flex-direction: column;
+            line-height: 19px;
+            gap: 0px;
+            /* gap: -5px; */
+            p {
+                font-family: "Titillium Web";
+                font-size: 40px;
+                margin: 0px;
+                font-weight: bold;
             }
+            span {
+                color: rgb(92, 92, 92);
+                margin: 0px;
+                font-family: "Playwrite NL";
+                font-size: 25px;
+            }
+        }
+        div.form-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            max-width: 500px;
+            gap: 10px;
+            div.input {
+                display: flex;
+                align-items: center;
+                label {
+                    font-family: "Suse", sans-serif;
+                    font-weight: 600;
+                    font-size: 18px;
+                    color: #202a36;
+                    width: 200px;
+                    @media screen and (max-width: 768px) {
+                        font-size: 15px;
+                        width: 180px;
+                    }
+                }
+                input {
+                    padding: 8px 15px;
+                    border-radius: 3px;
+                    border: none;
+                    outline: none;
+                    font-size: larger;
+                    font-family: "Suse";
+                    box-shadow: 5px 5px #202a36;
+                    border: 2px solid #202a36;
+                    @media screen and (max-width: 768px) {
+                        padding: 5px 10px;
+                    }
+                    &:focus {
+                        background-color: aliceblue;
+                    }
+                }
+                span {
+                    font-family: "Suse", sans-serif;
+                    font-size: 16px;
+                    color: #202a36;
+                    padding: 5px 10px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 130px;
+                }
+                div.fileInputContainer {
+                    border: 2px solid #202a36;
+                    border-radius: 5px;
+                    padding: 5px 10px;
+                    position: relative;
+                    overflow: hidden;
+                    font-family: "Suse", sans-serif;
+                    &:hover {
+                        background-color: #202a36;
+                        color: white;
+                    }
+                    &:has(.error) {
+                        border: 2px solid red;
+                    }
+                    p {
+                        margin: 0;
+                        white-space: nowrap;
+                    }
+                    input {
+                        transform: scale(5);
+                        opacity: 0;
+                        position: absolute;
+                    }
+                }
+            }
+            button {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                background-color: #202a36;
+                color: white;
+                font-size: 18px;
+                font-family: "Suse";
+                cursor: pointer;
+                margin-top: 20px;
+                width: fit-content;
+                transition: all 0.3s;
+                &:hover {
+                    background-color: #2c3e50;
+                    transform: scale(1.1);
+                }
+                &:active {
+                    transform: scale(0.95);
+                }
+            }
+        }
+    }
+
+    h2 {
+        font-family: "Titillium Web";
+        font-size: 30px;
+        color: #202a36;
+        margin: 0px;
+        margin-top: 30px;
+        border-bottom: 2px solid #202a36;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 30px;
+        background: linear-gradient(135deg, #f9f9f9, #ffffff);
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    thead {
+        background: linear-gradient(135deg, #202a36, #9ba0a4);
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 1.2em;
+        font-family: "Suse";
+    }
+
+    th,
+    td {
+        padding: 20px;
+        text-align: left; /* Ensure all columns are left-aligned */
+    }
+
+    th {
+        font-weight: 600;
+        border-bottom: 2px solid #ddd;
+    }
+
+    tbody tr {
+        transition:
+            background-color 0.3s,
+            transform 0.2s;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    tbody tr:hover {
+        background-color: #d1d1d1;
+        transform: scale(1.01);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    td {
+        border-bottom: 1px solid #eee;
+        font-size: 1em;
+        font-family: "Suse";
+        color: #333;
+    }
+
+    td:first-child {
+        font-weight: bold;
+        color: #2c3e50;
+    }
+
+    /* Removed the right-alignment for the last column */
+    caption {
+        font-size: 1.5em;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #2c3e50;
+    }
+
+    @media screen and (max-width: 900px) {
+        table {
+            font-size: 0.85em;
+        }
+
+        th,
+        td {
+            padding: 15px;
         }
     }
 }
@@ -343,7 +522,7 @@ div#addExpert {
     border: 2px solid red !important;
 }
 
-.active-nav-item{
+.active-nav-item {
     background-color: #2c3e50;
 }
 
@@ -365,9 +544,8 @@ a span {
     color: inherit; /* Ensures the span inherits the color from the parent anchor */
 }
 
-
 /* Center the text in the table headers */
-#viewExpert table, 
+#viewExpert table,
 #viewCandidates table {
     width: 100%;
     border-collapse: collapse;
@@ -376,22 +554,21 @@ a span {
     text-align: center;
 }
 
-#viewExpert th, 
-#viewCandidates th, 
-#viewExpert td, 
+#viewExpert th,
+#viewCandidates th,
+#viewExpert td,
 #viewCandidates td {
     padding: 12px 15px;
     text-align: center; /* Center-aligns all content inside table headers and data cells */
 }
 
-#viewExpert th, 
+#viewExpert th,
 #viewCandidates th {
     background-color: #f4f4f4;
     font-weight: bold;
-    
 }
 
-#viewExpert td, 
+#viewExpert td,
 #viewCandidates td {
     border: 1px solid #ddd;
 }
@@ -403,26 +580,25 @@ a span {
 }
 
 /* Style the anchor tags */
-#viewExpert a, 
+#viewExpert a,
 #viewCandidates a {
-    color: black;  /* Set the text color to black */
+    color: black; /* Set the text color to black */
     text-decoration: none; /* Remove underline from links */
     font-weight: bold;
-    display: inline-flex;  /* Align icon and text horizontally */
+    display: inline-flex; /* Align icon and text horizontally */
     align-items: center;
 }
 
 /* Optional: Change the color on hover */
-#viewExpert a:hover, 
+#viewExpert a:hover,
 #viewCandidates a:hover {
-    color: #444;  /* Slightly lighter black */
+    color: #444; /* Slightly lighter black */
 }
 /* Remove background image for both #viewExpert and #viewCandidates */
 #viewExpert,
 #viewCandidates {
     background-image: none; /* Removes the background image */
 }
-
 
 /* Style for the heading above the table */
 .table-heading {
@@ -435,7 +611,7 @@ a span {
 }
 
 /* Center the text in the table headers and ensure text wraps within two lines */
-#viewExpert th, 
+#viewExpert th,
 #viewCandidates th {
     padding: 12px 15px;
     text-align: center; /* Center-aligns all content inside table headers */

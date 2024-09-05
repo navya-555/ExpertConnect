@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=SUSE:100,200,300,regular,500,600,700,800" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Playwrite+PE:100,200,300,regular" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Playwrite+NL:100,200,300,regular" rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css?family=Titillium+Web:200,200italic,300,300italic,regular,italic,600,600italic,700,700italic,900"
         rel="stylesheet" />
@@ -22,7 +24,7 @@
         </div> -->
 
         <div class="nav-links">
-            <div class="nav-item " data-target="expert-matching">
+            <div class="nav-item " data-target="expert-match">
                 <div class="icon">
                     <img src="static/img/matchingIcon2.png" alt="">
                 </div>
@@ -57,22 +59,29 @@
             </div>
         </div>
     </nav>
+
     <div id="expert-match" class="page active">
         <form action="/fetch" method="POST" enctype="multipart/form-data">
-            <h1>Candidate-Expert profile matching</h1>
-            <div style="display: flex;">
-                <div>
+            <div class="header"><span>Unlock</span><br> <p>Expert Matches</p><br><span>for Your</span><br><p>Candidate</p></div>
+            <div class="form-section">
+                <div class="input">
                     <label for="username">Candidate's Username:</label>
                     <input type="text" id="username" name="username" required autofocus>
                 </div>
+                <div class="input">
+                    <label for="jd">Job Description:</label>
+                    <div class="fileInputContainer">
+                        <p>Upload from memory</p>
+                        <input type="file" accept="application/pdf" name="jd" id="jd" required>
+                    </div>
+                    <span id="photo-file-name">No file chosen</span>
+                </div>
+                <button type="submit" id="match">Submit</button>
             </div>
-            <label for="jd">Job Description:</label>
-            <input type="file" name="jd" id="jd" required>
-            <button type="submit" id="match">Submit</button>
         </form>
         {% if experts_scores %}
         <h2>Matching Experts</h2>
-        <table  cellpadding="10" cellspacing="0">
+        <table cellpadding="10" cellspacing="0">
             <thead>
                 <tr>
                     <th>Expert Username</th>
