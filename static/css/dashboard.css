@@ -87,13 +87,11 @@ div.page {
     flex: 1 1 auto;
     height: 100vh;
     background-color: ghostwhite;
-    background-image: url(../img/background.svg);
+    background-image: url(../img/dashboardBg.svg);
     background-size: cover;
     display: none;
     overflow-x: hidden;
-    /* @media screen and (max-width: 900px) { */
     margin-left: 60px;
-    /* } */
     @media screen and (max-width: 520px) {
         padding: 30px 0px;
     }
@@ -315,7 +313,6 @@ div#addExpert {
 
 .error {
     border: 2px solid red !important;
-    /* box-shadow: 5px 5px red !important; */
 }
 
 .active-nav-item{
