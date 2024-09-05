@@ -60,15 +60,18 @@
     <div id="expert-matching" class="page active">
         <form action="">
             <h1>Candidate-Expert profile matching</h1>
-            <div style="display: flex;">
-                <div>
-                    <label for="username">Candidate's Username:</label>
-                    <input type="text" id="username" name="username" required autofocus>
-                </div>
+            <div class="fetch-username">
+                <label for="username">Candidate's Username:</label>
+                <input type="text" id="username" name="username" placeholder="Candidate's Username" required autofocus>
                 <button type="button" id="fetch-candidate">Fetch</button>
             </div>
             <label for="resume">Your resume:</label>
             <input type="file" name="resume" id="resume" required>
+            <div class="fileInputContainer">
+                <p>Upload from memory</p>
+                <input type="file" name="photo" accept="image/jpg, image/jpeg, image/png" id="photo"
+                    onchange="showFileName(this, 'photo-file-name')" required>
+            </div>
             <button type="submit" id="match">Submit</button>
         </form>
     </div>
