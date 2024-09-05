@@ -20,12 +20,14 @@
         <!-- <div class="logo">
             <h4>ExpertSelect</h4>
         </div> -->
+
         <div class="nav-links">
             <div class="nav-item" data-target="dashboard">
                 <div class="icon">
                     <img src="static/img/menu.png" alt="">
                 </div>
-                <span class="nav-item-title">Dashboard</span>
+                <span class="nav-item-title">Expert Matching</span>
+
             </div>
             <div class="nav-item" data-target="addExpert">
                 <div class="icon">
@@ -57,7 +59,21 @@
         </div>
     </nav>
     <div id="dashboard" class="page active">
-        <h1>Dashboard</h1>
+        <div id="expert-match" class="page active">
+            <form action="">
+                <h1>Candidate-Expert profile matching</h1>
+                <div style="display: flex;">
+                    <div>
+                        <label for="username">Candidate's Username:</label>
+                        <input type="text" id="username" name="username" required autofocus>
+                    </div>
+                    <button type="button" id="fetch-candidate">Fetch</button>
+                </div>
+                <label for="resume">Your resume:</label>
+                <input type="file" name="resume" id="resume" required>
+                <button type="submit" id="match">Submit</button>
+            </form>
+        </div>
     </div>
 
     <div id="addExpert" class="page">
