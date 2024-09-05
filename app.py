@@ -275,7 +275,7 @@ def candidate_expert_score(can_username,exp_username):
 
 @app.route('/test')
 def jd_expert_score():
-    candidate = Candidate.query.filter_by(username='sufyan').first()
+    candidate = Candidate.query.filter_by(username='cand101').first()
 
     jd_emb=process_resume_cv(candidate.resume)
 

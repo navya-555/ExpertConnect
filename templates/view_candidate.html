@@ -1,5 +1,5 @@
-{% if experts %}
-        <!-- <h2 class="table-heading">Experts Information</h2> -->
+{% if candidates %}
+        <!-- <h2 class="table-heading">Candidates Information</h2> -->
         <table>
             <thead>
                 <tr>
@@ -16,48 +16,47 @@
                 </tr>
             </thead>
             <tbody>
-                {% for expert in experts %}
+                {% for candidate in candidates %}
                 <tr>
                     <td>{{loop.index}}</td>
-                    <td>{{ expert.name }}</td>
-                    <td>{{ expert.username }}</td>
-                    <td>{{ expert.email }}</td>
-                    <td>{{ expert.phone }}</td>
+                    <td>{{ candidate.name }}</td>
+                    <td>{{ candidate.username }}</td>
+                    <td>{{ candidate.email }}</td>
+                    <td>{{ candidate.phone }}</td>
                     <td>
-                        {% if expert.google_scholar_link %}
-                        <a href="{{ expert.google_scholar_link }}" target="_blank"> <i class="fa-regular fa-eye"></i>
+                        {% if candidate.google_scholar_link %}
+                        <a href="{{ candidate.google_scholar_link }}" target="_blank"> <i class="fa-regular fa-eye"></i>
                             View</a>
                         {% else %}
                         N/A
                         {% endif %}
                     </td>
                     <td>
-                        {% if expert.github_link %}
-                        <a href="{{ expert.github_link }}" target="_blank"> <i class="fa-regular fa-eye"></i>
-                            View</a>
+                        {% if candidate.github_link %}
+                        <a href="{{ candidate.github_link }}" target="_blank"> <i class="fa-regular fa-eye"></i> View</a>
                         {% else %}
                         N/A
                         {% endif %}
                     </td>
                     <td>
-                        {% if expert.photo %}
-                        <img src="data:image/png;base64,{{ expert.photo | b64encode }}" alt="Photo" width="100">
+                        {% if candidate.photo %}
+                        <img src="data:image/png;base64,{{ candidate.photo | b64encode }}" alt="Photo" width="100">
                         {% else %}
                         N/A
                         {% endif %}
                     </td>
                     <td>
-                        {% if expert.resume %}
-                        <a href="data:application/pdf;base64,{{ expert.resume | b64encode }}" download="resume.pdf"><i
-                                class="fa-solid fa-file-arrow-down"></i>Download</a>
+                        {% if candidate.resume %}
+                        <a href="data:application/pdf;base64,{{ candidate.resume | b64encode }}"
+                            download="resume.pdf"><i class="fa-solid fa-file-arrow-down"></i> Download</a>
                         {% else %}
                         N/A
                         {% endif %}
                     </td>
                     <td>
-                        {% if expert.cv %}
-                        <a href="data:application/pdf;base64,{{ expert.cv | b64encode }}" download="cv.pdf"><i
-                                class="fa-solid fa-file-arrow-down"></i>Download</a>
+                        {% if candidate.cv %}
+                        <a href="data:application/pdf;base64,{{ candidate.cv | b64encode }}" download="cv.pdf"><i
+                                class="fa-solid fa-file-arrow-down"></i> Download</a>
                         {% else %}
                         N/A
                         {% endif %}
@@ -67,5 +66,5 @@
             </tbody>
         </table>
         {% else %}
-        <p>No experts registered.</p>
+        <p>No candidates registered.</p>
         {% endif %}
