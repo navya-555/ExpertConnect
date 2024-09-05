@@ -22,7 +22,7 @@
         </div> -->
 
         <div class="nav-links">
-            <div class="nav-item" data-target="dashboard">
+            <div class="nav-item" data-target="expert-match">
                 <div class="icon">
                     <img src="static/img/menu.png" alt="">
                 </div>
@@ -58,22 +58,42 @@
             </div>
         </div>
     </nav>
-    <div id="dashboard" class="page active">
-        <div id="expert-match" class="page active">
-            <form action="">
-                <h1>Candidate-Expert profile matching</h1>
-                <div style="display: flex;">
-                    <div>
-                        <label for="username">Candidate's Username:</label>
-                        <input type="text" id="username" name="username" required autofocus>
-                    </div>
-                    <button type="button" id="fetch-candidate">Fetch</button>
+    <div id="expert-match" class="page active">
+        <form action="/fetch" method="POST" enctype="multipart/form-data">
+            <h1>Candidate-Expert profile matching</h1>
+            <div style="display: flex;">
+                <div>
+                    <label for="username">Candidate's Username:</label>
+                    <input type="text" id="username" name="username" required autofocus>
                 </div>
-                <label for="resume">Your resume:</label>
-                <input type="file" name="resume" id="resume" required>
-                <button type="submit" id="match">Submit</button>
-            </form>
-        </div>
+            </div>
+            <label for="jd">Job Description:</label>
+            <input type="file" name="jd" id="jd" required>
+            <button type="submit" id="match">Submit</button>
+        </form>
+        {% if experts_scores %}
+        <h2>Matching Experts</h2>
+        <table  cellpadding="10" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Expert Username</th>
+                    <th>Relevance Score</th>
+                    <th>Job Description Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through experts_scores and display each expert's info -->
+                {% for expert in experts_scores %}
+                <tr>
+                    <td>{{ expert[0] }}</td>
+                    <td>{{ expert[1] }}</td>
+                    <td>{{ expert[2] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
     </div>
     <div id="addExpert" class="page">
         {% include 'add_expert.html' %}

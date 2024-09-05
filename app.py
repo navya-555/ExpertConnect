@@ -1,12 +1,13 @@
-from flask import Flask, redirect, render_template, request, Response
+from flask import Flask, redirect, render_template, request, Response,flash
 from flask_sqlalchemy import SQLAlchemy
 import base64
 import json
 import numpy as np
 import threading
-from utils.llm_func import process_resume_cv,process_gscholar,compute_infoSource_pair
+from utils.llm_func import process_resume_cv,process_gscholar,compute_infoSource_pair,process_job_des
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = "apppication"
 
 # Configure the database URI
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Main.db'  # SQLite database in the project root directory
@@ -104,7 +105,7 @@ def index():
 def dashboard():
     experts = Expert.query.all()
     candidates = Candidate.query.all()
-    return render_template("dashboard.html",experts=experts,candidates=candidates)
+    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=None)
 
 @app.route('/logout')
 def logout():
@@ -197,6 +198,27 @@ def add_candidate():
         return redirect('/dashboard')
     return redirect('/')
 
+@app.route('/fetch', methods=['POST'])
+def fetch_candidate():
+    can_username = request.form.get('username')
+    candidate=Candidate.query.filter_by(username=can_username).first()
+    if candidate is None:
+        return redirect('/dashboard')
+
+    jd_file = request.files['jd']
+    jd_data = jd_file.read()
+    experts_list=jd_expert_score(jd_data)
+    if len(experts_list)>10:
+        experts_list=experts_list[:10]
+    
+    experts_scores=[]
+    for exp_username,jd_score in experts_list:
+        rel_score=candidate_expert_score(can_username,exp_username)
+        experts_scores.append((exp_username,rel_score,jd_score))
+    
+    experts_scores=sorted(experts_scores, key=lambda x: x[1], reverse=True)
+
+    return render_template("dashboard.html",experts=None,candidates=None,experts_scores=experts_scores)
 
 def process_expert(user_name):
     with app.app_context():
@@ -274,11 +296,8 @@ def candidate_expert_score(can_username,exp_username):
 
     return (relevency_score)
 
-@app.route('/test')
-def jd_expert_score():
-    candidate = Candidate.query.filter_by(username='cand101').first()
-
-    jd_emb=process_resume_cv(candidate.resume)
+def jd_expert_score(jd_data):
+    jd_emb=process_job_des(jd_data)
 
     experts=Expert_Emb.query.all()
 
@@ -293,7 +312,7 @@ def jd_expert_score():
         expert_list.append((expert.username,
                             max(score_list)))
         
-    return Response(str(sorted(expert_list, key=lambda x: x[1], reverse=True)))
+    return sorted(expert_list, key=lambda x: x[1], reverse=True)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
