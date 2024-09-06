@@ -13,6 +13,8 @@
                     <th class="bordered">Photo</th>
                     <th class="bordered">Resume</th>
                     <th class="bordered">CV</th>
+                    <th scope="col">Actions</th>
+                  
                 </tr>
             </thead>
             <tbody>
@@ -62,6 +64,11 @@
                         N/A
                         {% endif %}
                     </td>
+                    <td>
+                        <a href="/delete_expert/{{expert.id}}" type="button"
+                            class="btn btn-outline-dark btn-sm mx-1">Delete</button>
+                    </td>
+                  
                 </tr>
                 {% endfor %}
             </tbody>
