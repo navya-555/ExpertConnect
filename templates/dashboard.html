@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css?family=Playwrite+PE:100,200,300,regular" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Playwrite+NL:100,200,300,regular" rel="stylesheet" />
     <link
+        href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
+        rel="stylesheet" />
+    <link
         href="https://fonts.googleapis.com/css?family=Titillium+Web:200,200italic,300,300italic,regular,italic,600,600italic,700,700italic,900"
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,200,300,regular,500,600,700,800,900"
@@ -62,7 +65,10 @@
 
     <div id="expert-match" class="page active">
         <form action="/fetch" method="POST" enctype="multipart/form-data">
-            <div class="header"><!--span>Unlock</span><br--> <p>Expert Matches</p><!--br><span>for Your</span--><br><p>For Candidate</p></div>
+            <div class="header"><!--span>Unlock</span><br-->
+                <p>Expert Matches</p><!--br><span>for Your</span--><br>
+                <p>For Candidate</p>
+            </div>
             <div class="form-section">
                 <div class="input">
                     <label for="username">Candidate's Username:</label>
@@ -79,6 +85,45 @@
                 <button type="submit" id="match">Submit</button>
             </div>
         </form>
+
+        <!--cards-->
+        <div class="card-container">
+            <div class="card">
+                <span class="title">Expert</span>
+                <div class="card-icon">
+                    <img src="./../static/img/regpic.jpg" alt="">
+                </div>
+                <div class="card-info">
+                    <div><span class="info-name">Name:&nbsp;&nbsp;</span><span class="info-value">Kanhaiya Yadav</span>
+                    </div>
+                    <div><span class="info-name">Relevance Score:&nbsp;&nbsp;</span><span
+                            class="info-value">0.5481590879880343</span></div>
+                    <div><span class="info-name">Job Description Score:&nbsp;&nbsp;</span><span
+                            class="info-value">0.5866487142249154</span></div>
+                </div>
+            </div>
+            <div class="card">
+                <span class="title">Candidate</span>
+                <div class="card-icon">
+                    <img src="./../static/img/icon2.jpg" alt="">
+                </div>
+                <div class="card-info">
+                    <div>
+                        <span class="info-name">Name:&nbsp;&nbsp;</span>
+                        <span class="info-value">Kanhaiya Yadav</span>
+                    </div>
+                    <div>
+                        <span class="info-name">Username:&nbsp;&nbsp;</span>
+                        <span class="info-value">kanhaiyadav</span>
+                    </div>
+                    <div>
+                        <span class="info-name">Email:&nbsp;&nbsp;</span>
+                        <span class="info-value">kanhaiya2004yadav@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Display matching experts -->
         {% if experts_scores %}
         <h2>Matching Experts</h2>
         <table cellpadding="10" cellspacing="0">
