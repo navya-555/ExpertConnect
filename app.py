@@ -40,6 +40,35 @@ class Candidate(db.Model):
     google_scholar_link = db.Column(db.String(200), nullable=True)
     github_link = db.Column(db.String(200), nullable=True)
 
+
+
+
+@app.route('/delete_candidate/<int:id>')                  
+def delete_candidate(id):
+
+    candidate = Candidate.query.filter_by(id=id).first()
+    db.session.delete(candidate)
+    db.session.commit()
+    return redirect("/dashboard")
+
+
+
+@app.route('/delete_expert/<int:id>')                  
+def delete_expert(id):
+  
+    expert = Expert.query.filter_by(id=id).first()
+    expert_emb=Expert_Emb.query.filter_by(id=id).first()
+    candidate_emb=Candidate_Emb.query.filter_by(id=id).first()
+    db.session.delete(expert)
+    db.session.delete(expert_emb)
+    db.session.delete(candidate_emb)
+    db.session.commit()
+    return redirect("/dashboard")
+
+
+
+
+
 class Expert_Emb(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
@@ -105,7 +134,18 @@ def index():
 def dashboard():
     experts = Expert.query.all()
     candidates = Candidate.query.all()
-    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=None)
+    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=None,candidate=None)
+
+@app.route('/cdashboard')
+def cdashboard():
+    return render_template("/Candidate_dashboard.html")
+
+
+
+
+
+
+
 
 @app.route('/logout')
 def logout():
@@ -201,8 +241,8 @@ def add_candidate():
         return redirect('/')
     return redirect('/')
 
-@app.route('/fetch', methods=['POST'])
-def fetch_candidate():
+@app.route('/match', methods=['POST'])
+def match():
     can_username = request.form.get('username')
     candidate=Candidate.query.filter_by(username=can_username).first()
     if candidate is None:
@@ -217,13 +257,31 @@ def fetch_candidate():
     experts_scores=[]
     for exp_username,jd_score in experts_list:
         rel_score=candidate_expert_score(can_username,exp_username)
+
+        rel_score = round(rel_score * 100, 3)
+        jd_score = round(jd_score * 100, 3)
+
         experts_scores.append((exp_username,rel_score,jd_score))
     
     experts_scores=sorted(experts_scores, key=lambda x: x[1], reverse=True)
 
     experts = Expert.query.all()
     candidates = Candidate.query.all()
-    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=experts_scores)
+    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=experts_scores,candidate=candidate)
+
+
+@app.route('/expert/photo/<username>')
+def get_expert_photo(username):
+    expert = Expert.query.filter_by(username=username).first()
+    if expert and expert.photo:
+        return Response(expert.photo, mimetype='image/jpeg')  # Adjust mimetype as needed (e.g., image/png)
+
+@app.route('/candidate/photo/<username>')
+def get_candidate_photo(username):
+    candidate = Candidate.query.filter_by(username=username).first()
+    if candidate and candidate.photo:
+        return Response(candidate.photo, mimetype='image/jpeg')  # Adjust mimetype as needed (e.g., image/png)
+
 
 def process_expert(user_name):
     with app.app_context():
@@ -328,4 +386,4 @@ def jd_expert_score(jd_data):
     return sorted(expert_list, key=lambda x: x[1], reverse=True)
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5500)
