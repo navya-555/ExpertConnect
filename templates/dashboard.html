@@ -72,6 +72,7 @@
 
     <div id="expert-match" class="page active">
         <form action="/match" method="POST" enctype="multipart/form-data">
+        <form action="/match" method="POST" enctype="multipart/form-data">
             <div class="header"><!--span>Unlock</span><br-->
                 <p>Expert Matches</p><!--br><span>for Your</span--><br>
                 <p>For Candidate</p>
@@ -95,35 +96,18 @@
 
         <!-- Display matching experts -->
         {% if experts_scores %}
-        <h2>Matching Experts</h2>
+        <h2 style="margin-bottom: 30px;">Matching Experts</h2>
 
         <!--cards-->
-        <div class="card-container">
+        <div class="card-container" style="flex-direction: row; max-height: 200px;">
             <!-- Candidate Card -->
-            <div class="card">
+            <div class="card" style="flex-direction: row; max-height: 200px;">
                 <span class="title">Candidate</span>
-                <div class="card-icon">
-                    <img src="{{ url_for('get_candidate_photo', username=candidate.username) }}" alt="Candidate Photo">
-                    <!-- Dynamic candidate image -->
-                </div>
-                <div class="card-info">
-                    <div><span class="info-name">Name:&nbsp;&nbsp;</span><span class="info-value">{{ candidate.name
-                            }}</span></div>
-                    <div><span class="info-name">Username:&nbsp;&nbsp;</span><span class="info-value">{{
-                            candidate.username }}</span></div>
-                    <div><span class="info-name">Email:&nbsp;&nbsp;</span><span class="info-value">{{ candidate.email
-                            }}</span></div>
-                </div>
-            </div>
-
-
-
-            <!-- Expert Card -->
-            <div class="card">
-                <span class="title">Expert</span>
                 <div class="card-icon">
                     <img src="{{ url_for('get_expert_photo', username=experts_scores[0][0]) }}" alt="Expert Photo">
                     <!-- Dynamic expert image -->
+                    <img src="{{ url_for('get_candidate_photo', username=candidate.username) }}" alt="Candidate Photo">
+                    <!-- Dynamic candidate image -->
                 </div>
                 <div class="card-info">
                     <div><span class="info-name">Name:&nbsp;&nbsp;</span><span class="info-value">{{
@@ -181,6 +165,12 @@
                         <input type="file" accept="application/pdf" name="jd" id="jd" required>
                     </div>
                     <span id="photo-file-name">No file chosen</span>
+                    <div><span class="info-name">Name:&nbsp;&nbsp;</span><span class="info-value">{{ candidate.name
+                            }}</span></div>
+                    <div><span class="info-name">Username:&nbsp;&nbsp;</span><span class="info-value">{{
+                            candidate.username }}</span></div>
+                    <div><span class="info-name">Email:&nbsp;&nbsp;</span><span class="info-value">{{ candidate.email
+                            }}</span></div>
                 </div>
                 <button type="submit" id="match">Add Job</button>
             </div>

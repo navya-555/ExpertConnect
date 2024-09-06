@@ -1,78 +1,80 @@
 {% if experts %}
-        <!-- <h2 class="table-heading">Experts Information</h2> -->
-        <table>
-            <thead>
-                <tr>
-                    <th class="bordered">Sno</th>
-                    <th class="bordered">Name</th>
-                    <th class="bordered">Username</th>
-                    <th class="bordered">Email</th>
-                    <th class="bordered">Phone</th>
-                    <th class="bordered">Google Scholar</th>
-                    <th class="bordered">GitHub</th>
-                    <th class="bordered">Photo</th>
-                    <th class="bordered">Resume</th>
-                    <th class="bordered">CV</th>
-                    <th scope="col">Actions</th>
-                  
-                </tr>
-            </thead>
-            <tbody>
-                {% for expert in experts %}
-                <tr>
-                    <td>{{loop.index}}</td>
-                    <td>{{ expert.name }}</td>
-                    <td>{{ expert.username }}</td>
-                    <td>{{ expert.email }}</td>
-                    <td>{{ expert.phone }}</td>
-                    <td>
-                        {% if expert.google_scholar_link %}
-                        <a href="{{ expert.google_scholar_link }}" target="_blank"> <i class="fa-regular fa-eye"></i>
-                            View</a>
-                        {% else %}
-                        N/A
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if expert.github_link %}
-                        <a href="{{ expert.github_link }}" target="_blank"> <i class="fa-regular fa-eye"></i>
-                            View</a>
-                        {% else %}
-                        N/A
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if expert.photo %}
-                        <img src="data:image/png;base64,{{ expert.photo | b64encode }}" alt="Photo" width="100">
-                        {% else %}
-                        N/A
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if expert.resume %}
-                        <a href="data:application/pdf;base64,{{ expert.resume | b64encode }}" download="resume.pdf"><i
-                                class="fa-solid fa-file-arrow-down"></i>Download</a>
-                        {% else %}
-                        N/A
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if expert.cv %}
-                        <a href="data:application/pdf;base64,{{ expert.cv | b64encode }}" download="cv.pdf"><i
-                                class="fa-solid fa-file-arrow-down"></i>Download</a>
-                        {% else %}
-                        N/A
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a href="/delete_expert/{{expert.id}}" type="button"
-                            class="btn btn-outline-dark btn-sm mx-1">Delete</button>
-                    </td>
-                  
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-        <p>No experts registered.</p>
-        {% endif %}
+<!-- <h2 class="table-heading">Experts Information</h2> -->
+<div style="display: flex; flex-direction: row; flex-wrap: wrap; width: 100vw; height: 100vh; overflow: auto; gap: 20px;padding: 30px;">
+    {% for expert in experts %}
+    <div class="card">
+        <span class="title">Expert</span>
+        <div class="card-icon">
+            <img src="data:image/png;base64,{{ expert.photo | b64encode }}" alt="Photo" width="100">
+        </div>
+        <div class="card-info">
+            <div>
+                <span class="info-name">Name:&nbsp;&nbsp;</span>
+                <span class="info-value">{{ expert.name }}</span>
+            </div>
+            <div>
+                <span class="info-name">Username:&nbsp;&nbsp;</span>
+                <span class="info-value">{{ expert.username }}</span>
+            </div>
+            <div>
+                <span class="info-name">Email:&nbsp;&nbsp;</span>
+                <span class="info-value">{{ expert.email }}</span>
+            </div>
+            <div>
+                <span class="info-name">Phone:&nbsp;&nbsp;</span>
+                <span class="info-value">{{ expert.phone }}</span>
+            </div>
+            <div>
+                <span class="info-name">Google Scholar:&nbsp;&nbsp;</span>
+                <span class="info-value">
+                    {% if expert.google_scholar_link %}
+                    <a href="{{ expert.google_scholar_link }}" target="_blank"> <i class="fa-regular fa-eye"></i>
+                        View</a>
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </span>
+            </div>
+            <div>
+                <span class="info-name">GitHub:&nbsp;&nbsp;</span>
+                <span class="info-value">
+                    {% if expert.github_link %}
+                    <a href="{{ expert.github_link }}" target="_blank"> <i class="fa-regular fa-eye"></i>
+                        View</a>
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </span>
+            </div>
+            <div>
+                <span class="info-name">Resume:&nbsp;&nbsp;</span>
+                <span class="info-value">
+                    {% if expert.resume %}
+                    <a href="data:application/pdf;base64,{{ expert.resume | b64encode }}" download="resume.pdf"><i
+                            class="fa-solid fa-file-arrow-down"></i>Download</a>
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </span>
+            </div>
+            <div>
+                <span class="info-name">CV:&nbsp;&nbsp;</span>
+                <span class="info-value">
+                    {% if candidate.cv %}
+                    <a href="data:application/pdf;base64,{{ candidate.cv | b64encode }}" download="cv.pdf"><i
+                            class="fa-solid fa-file-arrow-down"></i> Download</a>
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </span>
+            </div>
+            <div class="expert-delete">
+                    <a href="/delete_expert/{{expert.id}}" type="button"><i class="fa-solid fa-trash"></i></a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No experts registered.</p>
+{% endif %}
