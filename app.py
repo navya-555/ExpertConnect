@@ -105,7 +105,7 @@ def index():
 def dashboard():
     experts = Expert.query.all()
     candidates = Candidate.query.all()
-    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=None)
+    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=None,candidate=None)
 
 @app.route('/logout')
 def logout():
@@ -201,8 +201,8 @@ def add_candidate():
         return redirect('/')
     return redirect('/')
 
-@app.route('/fetch', methods=['POST'])
-def fetch_candidate():
+@app.route('/match', methods=['POST'])
+def match():
     can_username = request.form.get('username')
     candidate=Candidate.query.filter_by(username=can_username).first()
     if candidate is None:
@@ -217,13 +217,31 @@ def fetch_candidate():
     experts_scores=[]
     for exp_username,jd_score in experts_list:
         rel_score=candidate_expert_score(can_username,exp_username)
+
+        rel_score = round(rel_score * 100, 3)
+        jd_score = round(jd_score * 100, 3)
+
         experts_scores.append((exp_username,rel_score,jd_score))
     
     experts_scores=sorted(experts_scores, key=lambda x: x[1], reverse=True)
 
     experts = Expert.query.all()
     candidates = Candidate.query.all()
-    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=experts_scores)
+    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=experts_scores,candidate=candidate)
+
+
+@app.route('/expert/photo/<username>')
+def get_expert_photo(username):
+    expert = Expert.query.filter_by(username=username).first()
+    if expert and expert.photo:
+        return Response(expert.photo, mimetype='image/jpeg')  # Adjust mimetype as needed (e.g., image/png)
+
+@app.route('/candidate/photo/<username>')
+def get_candidate_photo(username):
+    candidate = Candidate.query.filter_by(username=username).first()
+    if candidate and candidate.photo:
+        return Response(candidate.photo, mimetype='image/jpeg')  # Adjust mimetype as needed (e.g., image/png)
+
 
 def process_expert(user_name):
     with app.app_context():
