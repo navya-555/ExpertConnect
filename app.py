@@ -4,7 +4,7 @@ import base64
 import json
 import numpy as np
 import threading
-from utils.llm_func import process_resume_cv,process_gscholar,compute_infoSource_pair,process_job_des
+from utils.llm_func import process_resume_cv,process_gscholar,compute_infoSource_pair,process_job_des,process_github
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "apppication"
@@ -134,7 +134,7 @@ def index():
 def dashboard():
     experts = Expert.query.all()
     candidates = Candidate.query.all()
-    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=None)
+    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=None,candidate=None)
 
 @app.route('/cdashboard')
 def cdashboard():
@@ -241,8 +241,8 @@ def add_candidate():
         return redirect('/')
     return redirect('/')
 
-@app.route('/fetch', methods=['POST'])
-def fetch_candidate():
+@app.route('/match', methods=['POST'])
+def match():
     can_username = request.form.get('username')
     candidate=Candidate.query.filter_by(username=can_username).first()
     if candidate is None:
@@ -257,13 +257,31 @@ def fetch_candidate():
     experts_scores=[]
     for exp_username,jd_score in experts_list:
         rel_score=candidate_expert_score(can_username,exp_username)
+
+        rel_score = round(rel_score * 100, 3)
+        jd_score = round(jd_score * 100, 3)
+
         experts_scores.append((exp_username,rel_score,jd_score))
     
     experts_scores=sorted(experts_scores, key=lambda x: x[1], reverse=True)
 
     experts = Expert.query.all()
     candidates = Candidate.query.all()
-    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=experts_scores)
+    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=experts_scores,candidate=candidate)
+
+
+@app.route('/expert/photo/<username>')
+def get_expert_photo(username):
+    expert = Expert.query.filter_by(username=username).first()
+    if expert and expert.photo:
+        return Response(expert.photo, mimetype='image/jpeg')  # Adjust mimetype as needed (e.g., image/png)
+
+@app.route('/candidate/photo/<username>')
+def get_candidate_photo(username):
+    candidate = Candidate.query.filter_by(username=username).first()
+    if candidate and candidate.photo:
+        return Response(candidate.photo, mimetype='image/jpeg')  # Adjust mimetype as needed (e.g., image/png)
+
 
 def process_expert(user_name):
     with app.app_context():
@@ -285,6 +303,11 @@ def process_expert(user_name):
             gs_emb=process_gscholar(expert.google_scholar_link)
         else:
             gs_emb=None
+
+        if expert.github_link:
+            git_emb=process_github(expert.google_scholar_link)
+        else:
+            git_emb=None
 
         new_expert_embeddings = Expert_Emb(username=user_name)
         new_expert_embeddings.set_embeddings(resume_emb, cv_emb, gs_emb, None)
@@ -311,11 +334,14 @@ def process_candidate(user_name):
         else:
             gs_emb = None
 
-#         git_emb = None
+        if candidate.github_link:
+            git_emb=process_github(candidate.google_scholar_link)
+        else:
+            git_emb=None
 
         # Create a new Candidate_Emb record and save the embeddings
         new_candidate_embeddings = Candidate_Emb(username=user_name)
-        new_candidate_embeddings.set_embeddings(resume_emb, cv_emb, gs_emb, git_emb)
+        new_candidate_embeddings.set_embeddings(resume_emb, cv_emb, gs_emb, None)
         db.session.add(new_candidate_embeddings)
         db.session.commit()
 
