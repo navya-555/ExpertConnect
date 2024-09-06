@@ -58,7 +58,7 @@
                 </div>
                 <span class="nav-item-title">View Candidates</span>
             </div>
-           
+
             <div class="nav-item">
                 <div class="icon">
                     <img src="static/img/logout.png" alt="">
@@ -164,9 +164,9 @@
     </div>
 
     <div id="jobs" class="page " style="justify-content: center;">
-        <form style="height: 500px;" action="/match" method="POST" enctype="multipart/form-data ">
-            <div class="header"><!--span>Unlock</span><br-->
-                <p>Add Jobs</p><!--br><span>for Your</span--><br>
+        <form action="/add_job" method="POST" enctype="multipart/form-data">
+            <div class="header">
+                <p>Add Jobs</p>
                 <p>For Candidate</p>
             </div>
             <div class="form-section">
@@ -185,73 +185,42 @@
                 <button type="submit" id="match">Add Job</button>
             </div>
         </form>
+        
 
-        <!-- Display matching experts -->
-        {% if experts_scores %}
-        <h2>Matching Experts</h2>
-
-        <!--cards-->
-        <div class="card-container">
-            <!-- Candidate Card -->
-            <div class="card">
-                <span class="title">Candidate</span>
-                <div class="card-icon">
-                    <img src="{{ url_for('get_candidate_photo', username=candidate.username) }}" alt="Candidate Photo">
-                    <!-- Dynamic candidate image -->
-                </div>
-                <div class="card-info">
-                    <div><span class="info-name">Name:&nbsp;&nbsp;</span><span class="info-value">{{ candidate.name
-                            }}</span></div>
-                    <div><span class="info-name">Username:&nbsp;&nbsp;</span><span class="info-value">{{
-                            candidate.username }}</span></div>
-                    <div><span class="info-name">Email:&nbsp;&nbsp;</span><span class="info-value">{{ candidate.email
-                            }}</span></div>
-                </div>
-            </div>
-
-
-
-            <!-- Expert Card -->
-            <div class="card">
-                <span class="title">Expert</span>
-                <div class="card-icon">
-                    <img src="{{ url_for('get_expert_photo', username=experts_scores[0][0]) }}" alt="Expert Photo">
-                    <!-- Dynamic expert image -->
-                </div>
-                <div class="card-info">
-                    <div><span class="info-name">Name:&nbsp;&nbsp;</span><span class="info-value">{{
-                            experts_scores[0][0] }}</span></div>
-                    <div><span class="info-name">Relevance Score:&nbsp;&nbsp;</span><span class="info-value">{{
-                            experts_scores[0][1] }}</span></div>
-                    <div><span class="info-name">Job Description Score:&nbsp;&nbsp;</span><span class="info-value">{{
-                            experts_scores[0][2] }}</span></div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-        <table cellpadding="10" cellspacing="0">
+        {% if jobs %}
+        <!-- Jobs Table -->
+        <table>
             <thead>
                 <tr>
-                    <th>Expert Username</th>
-                    <th>Relevance Score</th>
-                    <th>Job Description Score</th>
+                    <th class="bordered">Sno</th>
+                    <th class="bordered">Title</th>
+                    <th class="bordered">Job Description</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Loop through experts_scores and display each expert's info -->
-                {% for expert in experts_scores %}
+                {% for job in jobs %}
                 <tr>
-                    <td>{{ expert[0] }}</td>
-                    <td>{{ expert[1] }}</td>
-                    <td>{{ expert[2] }}</td>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ job.title }}</td>
+                    <td>
+                        {% if job.jd %}
+                        <a href="data:application/pdf;base64,{{ job.jd | b64encode }}" download="job_description.pdf"><i
+                                class="fa-solid fa-file-arrow-down"></i>Download</a>
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="/delete_job/{{ job.id }}" type="button"
+                            class="btn btn-outline-dark btn-sm mx-1">Delete</a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+        {% else %}
+        <p>No jobs available.</p>
         {% endif %}
 
     </div>
