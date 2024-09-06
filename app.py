@@ -4,7 +4,7 @@ import base64
 import json
 import numpy as np
 import threading
-from utils.llm_func import process_resume_cv,process_gscholar,compute_infoSource_pair,process_job_des
+from utils.llm_func import process_resume_cv,process_gscholar,compute_infoSource_pair,process_job_des,process_github
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "apppication"
@@ -246,6 +246,11 @@ def process_expert(user_name):
         else:
             gs_emb=None
 
+        if expert.github_link:
+            git_emb=process_github(expert.google_scholar_link)
+        else:
+            git_emb=None
+
         new_expert_embeddings = Expert_Emb(username=user_name)
         new_expert_embeddings.set_embeddings(resume_emb, cv_emb, gs_emb, None)
         db.session.add(new_expert_embeddings)
@@ -271,11 +276,14 @@ def process_candidate(user_name):
         else:
             gs_emb = None
 
-        git_emb = None
+        if candidate.github_link:
+            git_emb=process_github(candidate.google_scholar_link)
+        else:
+            git_emb=None
 
         # Create a new Candidate_Emb record and save the embeddings
         new_candidate_embeddings = Candidate_Emb(username=user_name)
-        new_candidate_embeddings.set_embeddings(resume_emb, cv_emb, gs_emb, git_emb)
+        new_candidate_embeddings.set_embeddings(resume_emb, cv_emb, gs_emb, None)
         db.session.add(new_candidate_embeddings)
         db.session.commit()
 
