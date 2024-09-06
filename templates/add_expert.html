@@ -1,4 +1,4 @@
-<form action="/add_expert" method="POST" id="expert-registration-form">
+<form action="/add_expert" method="POST" id="expert-registration-form" enctype="multipart/form-data">
     <div id="form-section-container">
         <div id="header">
             <span>Fill up the form to</span>
@@ -8,20 +8,20 @@
             <h1>Personal Information: </h1>
             <div class="input">
                 <label for="full_name">Name: </label>
-                <input type="text" name="full_name" id="full_name"  autofocus>
+                <input type="text" name="full_name" id="full_name" required autofocus>
             </div>
             <div class="input">
                 <label for="username">Username: </label>
-                <input type="text" name="username" id="username" >
+                <input type="text" name="username" id="username" required>
             </div>
             <div class="input">
                 <label for="email">Email: </label>
-                <input type="email" name="email" id="email" >
+                <input type="email" name="email" id="email" required>
             </div>
-            <!-- <div class="input">
+            <div class="input">
                 <label for="phone">Phone no.: </label>
-                <input type="text" name="phone" id="phone" >
-            </div> -->
+                <input type="text" name="phone" id="phone">
+            </div>
         </div>
         <div class="form-section">
             <h1>Files</h1>
@@ -30,27 +30,27 @@
                 <div class="fileInputContainer">
                     <p>Upload from memory</p>
                     <input type="file" name="photo" accept="image/jpg, image/jpeg, image/png" id="photo"
-                        onchange="showFileName(this, 'photo-file-name')" >
+                        onchange="showFileName(this, 'photo-file-name')">
                 </div>
-                <span id="photo-file-name">No file chosen</span>
+                <!-- <span id="photo-file-name">No file chosen</span> -->
             </div>
             <div class="input">
                 <label for="resume">Upload your resume:* </label>
                 <div class="fileInputContainer">
                     <p>Upload from memory</p>
                     <input type="file" accept="application/pdf" name="resume" id="resume"
-                        onchange="showFileName(this, 'resume-file-name')" >
+                        onchange="showFileName(this, 'resume-file-name')">
                 </div>
-                <span id="resume-file-name">No file chosen</span>
+                <!-- <span id="resume-file-name">No file chosen</span> -->
             </div>
             <div class="input">
                 <label for="cv">Upload your CV: </label>
                 <div class="fileInputContainer">
                     <p>Upload from memory</p>
                     <input type="file" accept="application/pdf" name="cv" id="cv"
-                        onchange="showFileName(this, 'cv-file-name')" >
+                        onchange="showFileName(this, 'cv-file-name')">
                 </div>
-                <span id="cv-file-name">No file chosen</span>
+                <!-- <span id="cv-file-name">No file chosen</span> -->
             </div>
         </div>
         <div class="form-section">
