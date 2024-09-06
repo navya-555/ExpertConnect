@@ -88,12 +88,12 @@
 
         <!-- Display matching experts -->
         {% if experts_scores %}
-        <h2>Matching Experts</h2>
+        <h2 style="margin-bottom: 30px;">Matching Experts</h2>
 
         <!--cards-->
-        <div class="card-container">
+        <div class="card-container" style="flex-direction: row; max-height: 200px;">
             <!-- Candidate Card -->
-            <div class="card">
+            <div class="card" style="flex-direction: row; max-height: 200px;">
                 <span class="title">Candidate</span>
                 <div class="card-icon">
                     <img src="{{ url_for('get_candidate_photo', username=candidate.username) }}" alt="Candidate Photo">
@@ -112,7 +112,7 @@
 
 
             <!-- Expert Card -->
-            <div class="card">
+            <div class="card" style="flex-direction: row; max-height: 200px; ">
                 <span class="title">Expert</span>
                 <div class="card-icon">
                     <img src="{{ url_for('get_expert_photo', username=experts_scores[0][0]) }}" alt="Expert Photo">
