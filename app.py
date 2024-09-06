@@ -151,11 +151,11 @@ def add_expert():
         db.session.add(new_expert)
         db.session.commit()
 
-        # threading.Thread(target=process_expert, args=(username,)).start()
+        threading.Thread(target=process_expert, args=(username,)).start()
 
         # Redirect to dashboard or any other page
         return redirect('/dashboard')
-    return redirect('/')
+    return redirect('/dashboard')
 
 @app.route('/add_candidate', methods=['GET', 'POST'])
 def add_candidate():
@@ -193,9 +193,9 @@ def add_candidate():
         db.session.add(new_candidate)
         db.session.commit()
 
-        # threading.Thread(target=process_candidate, args=(username,)).start()
+        threading.Thread(target=process_candidate, args=(username,)).start()
 
-        return redirect('/dashboard')
+        return redirect('/')
     return redirect('/')
 
 @app.route('/fetch', methods=['POST'])

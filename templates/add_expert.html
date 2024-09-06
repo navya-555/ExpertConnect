@@ -8,20 +8,20 @@
             <h1>Personal Information: </h1>
             <div class="input">
                 <label for="full_name">Name: </label>
-                <input type="text" name="full_name" id="full_name" required autofocus>
+                <input type="text" name="full_name" id="full_name"  autofocus>
             </div>
             <div class="input">
                 <label for="username">Username: </label>
-                <input type="text" name="username" id="username" required>
+                <input type="text" name="username" id="username" >
             </div>
             <div class="input">
                 <label for="email">Email: </label>
-                <input type="email" name="email" id="email" required>
+                <input type="email" name="email" id="email" >
             </div>
-            <div class="input">
+            <!-- <div class="input">
                 <label for="phone">Phone no.: </label>
                 <input type="text" name="phone" id="phone" >
-            </div>
+            </div> -->
         </div>
         <div class="form-section">
             <h1>Files</h1>
@@ -30,7 +30,7 @@
                 <div class="fileInputContainer">
                     <p>Upload from memory</p>
                     <input type="file" name="photo" accept="image/jpg, image/jpeg, image/png" id="photo"
-                        onchange="showFileName(this, 'photo-file-name')" required>
+                        onchange="showFileName(this, 'photo-file-name')" >
                 </div>
                 <span id="photo-file-name">No file chosen</span>
             </div>
@@ -39,7 +39,7 @@
                 <div class="fileInputContainer">
                     <p>Upload from memory</p>
                     <input type="file" accept="application/pdf" name="resume" id="resume"
-                        onchange="showFileName(this, 'resume-file-name')" required>
+                        onchange="showFileName(this, 'resume-file-name')" >
                 </div>
                 <span id="resume-file-name">No file chosen</span>
             </div>
