@@ -2,9 +2,9 @@ from flask import Flask, redirect, render_template, request, Response,flash
 from flask_sqlalchemy import SQLAlchemy
 import base64
 import json
-import numpy as np
-import threading
-from utils.llm_func import process_resume_cv,process_gscholar,compute_infoSource_pair,process_job_des
+# import numpy as np
+# import threading
+# from utils.llm_func import process_resume_cv,process_gscholar,compute_infoSource_pair,process_job_des
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "apppication"
@@ -40,49 +40,49 @@ class Candidate(db.Model):
     google_scholar_link = db.Column(db.String(200), nullable=True)
     github_link = db.Column(db.String(200), nullable=True)
 
-class Expert_Emb(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True, nullable=False)
-    resume_emb = db.Column(db.Text, nullable=False)  # Store as JSON
-    cv_emb = db.Column(db.Text, nullable=True)       # Store as JSON
-    gscholar_emb = db.Column(db.Text, nullable=True) # Store as JSON
-    git_emb = db.Column(db.Text, nullable=True)      # Store as JSON
+# class Expert_Emb(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     username = db.Column(db.String(100), unique=True, nullable=False)
+#     resume_emb = db.Column(db.Text, nullable=False)  # Store as JSON
+#     cv_emb = db.Column(db.Text, nullable=True)       # Store as JSON
+#     gscholar_emb = db.Column(db.Text, nullable=True) # Store as JSON
+#     git_emb = db.Column(db.Text, nullable=True)      # Store as JSON
 
-    def set_embeddings(self, resume_emb, cv_emb, gscholar_emb, git_emb):
-        self.resume_emb = json.dumps(resume_emb)
-        self.cv_emb = json.dumps(cv_emb) if cv_emb is not None else None
-        self.gscholar_emb = json.dumps(gscholar_emb) if gscholar_emb is not None else None
-        self.git_emb = json.dumps([emb for emb in git_emb]) if git_emb else None
+#     def set_embeddings(self, resume_emb, cv_emb, gscholar_emb, git_emb):
+#         self.resume_emb = json.dumps(resume_emb)
+#         self.cv_emb = json.dumps(cv_emb) if cv_emb is not None else None
+#         self.gscholar_emb = json.dumps(gscholar_emb) if gscholar_emb is not None else None
+#         self.git_emb = json.dumps([emb for emb in git_emb]) if git_emb else None
 
-    def get_embeddings(self):
-        return {
-            "resume_emb": json.loads(self.resume_emb),
-            "cv_emb": json.loads(self.cv_emb) if self.cv_emb else None,
-            "gscholar_emb": json.loads(self.gscholar_emb) if self.gscholar_emb else None,
-            "git_emb": [emb for emb in json.loads(self.git_emb)] if self.git_emb else None
-        }
+#     def get_embeddings(self):
+#         return {
+#             "resume_emb": json.loads(self.resume_emb),
+#             "cv_emb": json.loads(self.cv_emb) if self.cv_emb else None,
+#             "gscholar_emb": json.loads(self.gscholar_emb) if self.gscholar_emb else None,
+#             "git_emb": [emb for emb in json.loads(self.git_emb)] if self.git_emb else None
+#         }
 
-class Candidate_Emb(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True, nullable=False)
-    resume_emb = db.Column(db.Text, nullable=False)  # Store as JSON
-    cv_emb = db.Column(db.Text, nullable=True)       # Store as JSON
-    gscholar_emb = db.Column(db.Text, nullable=True) # Store as JSON
-    git_emb = db.Column(db.Text, nullable=True)      # Store as JSON
+# class Candidate_Emb(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     username = db.Column(db.String(100), unique=True, nullable=False)
+#     resume_emb = db.Column(db.Text, nullable=False)  # Store as JSON
+#     cv_emb = db.Column(db.Text, nullable=True)       # Store as JSON
+#     gscholar_emb = db.Column(db.Text, nullable=True) # Store as JSON
+#     git_emb = db.Column(db.Text, nullable=True)      # Store as JSON
 
-    def set_embeddings(self, resume_emb, cv_emb, gscholar_emb, git_emb):
-        self.resume_emb = json.dumps(resume_emb)
-        self.cv_emb = json.dumps(cv_emb) if cv_emb is not None else None
-        self.gscholar_emb = json.dumps(gscholar_emb) if gscholar_emb is not None else None
-        self.git_emb = json.dumps([emb for emb in git_emb]) if git_emb else None
+#     def set_embeddings(self, resume_emb, cv_emb, gscholar_emb, git_emb):
+#         self.resume_emb = json.dumps(resume_emb)
+#         self.cv_emb = json.dumps(cv_emb) if cv_emb is not None else None
+#         self.gscholar_emb = json.dumps(gscholar_emb) if gscholar_emb is not None else None
+#         self.git_emb = json.dumps([emb for emb in git_emb]) if git_emb else None
 
-    def get_embeddings(self):
-        return {
-            "resume_emb": json.loads(self.resume_emb),
-            "cv_emb": json.loads(self.cv_emb) if self.cv_emb else None,
-            "gscholar_emb": json.loads(self.gscholar_emb) if self.gscholar_emb else None,
-            "git_emb": [emb for emb in json.loads(self.git_emb)] if self.git_emb else None
-        }
+#     def get_embeddings(self):
+#         return {
+#             "resume_emb": json.loads(self.resume_emb),
+#             "cv_emb": json.loads(self.cv_emb) if self.cv_emb else None,
+#             "gscholar_emb": json.loads(self.gscholar_emb) if self.gscholar_emb else None,
+#             "git_emb": [emb for emb in json.loads(self.git_emb)] if self.git_emb else None
+#         }
 
 
 # Create the database tables
@@ -198,123 +198,123 @@ def add_candidate():
         return redirect('/dashboard')
     return redirect('/')
 
-@app.route('/fetch', methods=['POST'])
-def fetch_candidate():
-    can_username = request.form.get('username')
-    candidate=Candidate.query.filter_by(username=can_username).first()
-    if candidate is None:
-        return redirect('/dashboard')
+# @app.route('/fetch', methods=['POST'])
+# def fetch_candidate():
+#     can_username = request.form.get('username')
+#     candidate=Candidate.query.filter_by(username=can_username).first()
+#     if candidate is None:
+#         return redirect('/dashboard')
 
-    jd_file = request.files['jd']
-    jd_data = jd_file.read()
-    experts_list=jd_expert_score(jd_data)
-    if len(experts_list)>10:
-        experts_list=experts_list[:10]
+#     jd_file = request.files['jd']
+#     jd_data = jd_file.read()
+#     experts_list=jd_expert_score(jd_data)
+#     if len(experts_list)>10:
+#         experts_list=experts_list[:10]
     
-    experts_scores=[]
-    for exp_username,jd_score in experts_list:
-        rel_score=candidate_expert_score(can_username,exp_username)
-        experts_scores.append((exp_username,rel_score,jd_score))
+#     experts_scores=[]
+#     for exp_username,jd_score in experts_list:
+#         rel_score=candidate_expert_score(can_username,exp_username)
+#         experts_scores.append((exp_username,rel_score,jd_score))
     
-    experts_scores=sorted(experts_scores, key=lambda x: x[1], reverse=True)
+#     experts_scores=sorted(experts_scores, key=lambda x: x[1], reverse=True)
 
-    experts = Expert.query.all()
-    candidates = Candidate.query.all()
-    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=experts_scores)
+#     experts = Expert.query.all()
+#     candidates = Candidate.query.all()
+#     return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=experts_scores)
 
-def process_expert(user_name):
-    with app.app_context():
-        expert=Expert.query.filter_by(username=user_name).first()
+# def process_expert(user_name):
+#     with app.app_context():
+#         expert=Expert.query.filter_by(username=user_name).first()
 
-        user_name=expert.username
+#         user_name=expert.username
 
-        if expert.resume:
-            resume_emb=process_resume_cv(expert.resume)
-        else:
-            resume_emb=None
+#         if expert.resume:
+#             resume_emb=process_resume_cv(expert.resume)
+#         else:
+#             resume_emb=None
 
-        if expert.cv:
-            cv_emb=process_resume_cv(expert.cv)
-        else:
-            cv_emb=None
+#         if expert.cv:
+#             cv_emb=process_resume_cv(expert.cv)
+#         else:
+#             cv_emb=None
 
-        if expert.google_scholar_link:
-            gs_emb=process_gscholar(expert.google_scholar_link)
-        else:
-            gs_emb=None
+#         if expert.google_scholar_link:
+#             gs_emb=process_gscholar(expert.google_scholar_link)
+#         else:
+#             gs_emb=None
 
-        new_expert_embeddings = Expert_Emb(username=user_name)
-        new_expert_embeddings.set_embeddings(resume_emb, cv_emb, gs_emb, None)
-        db.session.add(new_expert_embeddings)
-        db.session.commit()
+#         new_expert_embeddings = Expert_Emb(username=user_name)
+#         new_expert_embeddings.set_embeddings(resume_emb, cv_emb, gs_emb, None)
+#         db.session.add(new_expert_embeddings)
+#         db.session.commit()
     
-def process_candidate(user_name):
-    with app.app_context():
-        candidate = Candidate.query.filter_by(username=user_name).first()
+# def process_candidate(user_name):
+#     with app.app_context():
+#         candidate = Candidate.query.filter_by(username=user_name).first()
 
-        user_name = candidate.username
-        if candidate.resume:
-            resume_emb = process_resume_cv(candidate.resume)
-        else:
-            resume_emb = None
+#         user_name = candidate.username
+#         if candidate.resume:
+#             resume_emb = process_resume_cv(candidate.resume)
+#         else:
+#             resume_emb = None
 
-        if candidate.cv:
-            cv_emb = process_resume_cv(candidate.cv)
-        else:
-            cv_emb = None
+#         if candidate.cv:
+#             cv_emb = process_resume_cv(candidate.cv)
+#         else:
+#             cv_emb = None
 
-        if candidate.google_scholar_link:
-            gs_emb = process_gscholar(candidate.google_scholar_link)
-        else:
-            gs_emb = None
+#         if candidate.google_scholar_link:
+#             gs_emb = process_gscholar(candidate.google_scholar_link)
+#         else:
+#             gs_emb = None
 
-        git_emb = None
+# #         git_emb = None
 
-        # Create a new Candidate_Emb record and save the embeddings
-        new_candidate_embeddings = Candidate_Emb(username=user_name)
-        new_candidate_embeddings.set_embeddings(resume_emb, cv_emb, gs_emb, git_emb)
-        db.session.add(new_candidate_embeddings)
-        db.session.commit()
+#         # Create a new Candidate_Emb record and save the embeddings
+#         new_candidate_embeddings = Candidate_Emb(username=user_name)
+#         new_candidate_embeddings.set_embeddings(resume_emb, cv_emb, gs_emb, git_emb)
+#         db.session.add(new_candidate_embeddings)
+#         db.session.commit()
 
-def candidate_expert_score(can_username,exp_username):
-    can=Candidate_Emb.query.filter_by(username=can_username).first()
-    exp=Expert_Emb.query.filter_by(username=exp_username).first()
+# def candidate_expert_score(can_username,exp_username):
+#     can=Candidate_Emb.query.filter_by(username=can_username).first()
+#     exp=Expert_Emb.query.filter_by(username=exp_username).first()
 
-    exp_emb=exp.get_embeddings()
-    can_emb=can.get_embeddings()
+#     exp_emb=exp.get_embeddings()
+#     can_emb=can.get_embeddings()
 
-    relevency_list=[]
-    for can_field in can_emb.keys():
-        if not can_emb[can_field]:
-            continue
-        field_score=[]
-        for exp_field in exp_emb.keys():
-            if not exp_emb[exp_field]:
-                continue
-            field_score.append(compute_infoSource_pair(can_emb[can_field],exp_emb[exp_field]))
-        relevency_list.append(max(field_score))
+#     relevency_list=[]
+#     for can_field in can_emb.keys():
+#         if not can_emb[can_field]:
+#             continue
+#         field_score=[]
+#         for exp_field in exp_emb.keys():
+#             if not exp_emb[exp_field]:
+#                 continue
+#             field_score.append(compute_infoSource_pair(can_emb[can_field],exp_emb[exp_field]))
+#         relevency_list.append(max(field_score))
 
-    relevency_score=(np.mean(relevency_list))
+#     relevency_score=(np.mean(relevency_list))
 
-    return (relevency_score)
+#     return (relevency_score)
 
-def jd_expert_score(jd_data):
-    jd_emb=process_job_des(jd_data)
+# def jd_expert_score(jd_data):
+#     jd_emb=process_job_des(jd_data)
 
-    experts=Expert_Emb.query.all()
+#     experts=Expert_Emb.query.all()
 
-    expert_list=[]
-    for expert in experts:
-        exp_emp=expert.get_embeddings()
-        score_list=[]
-        for source in exp_emp.keys():
-            if not exp_emp[source]:
-                continue
-            score_list.append(compute_infoSource_pair(jd_emb,exp_emp[source]))
-        expert_list.append((expert.username,
-                            max(score_list)))
+#     expert_list=[]
+#     for expert in experts:
+#         exp_emp=expert.get_embeddings()
+#         score_list=[]
+#         for source in exp_emp.keys():
+#             if not exp_emp[source]:
+#                 continue
+#             score_list.append(compute_infoSource_pair(jd_emb,exp_emp[source]))
+#         expert_list.append((expert.username,
+#                             max(score_list)))
         
-    return sorted(expert_list, key=lambda x: x[1], reverse=True)
+#     return sorted(expert_list, key=lambda x: x[1], reverse=True)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
