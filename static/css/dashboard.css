@@ -18,7 +18,7 @@ nav {
     width: 60px;
     padding: 10px;
     position: fixed;
-    z-index: 1;
+    z-index: 10000;
     transition: all 0.2s;
     top: 0;
     left: 0;
@@ -127,10 +127,11 @@ div#expert-match {
                 font-weight: bold;
             }
             span {
-                color: rgb(92, 92, 92);
+                color: rgb(57, 57, 57);
                 margin: 0px;
                 font-family: "Playwrite NL";
                 font-size: 25px;
+                font-weight: 700;
             }
         }
         div.form-section {
