@@ -57,40 +57,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Get all required inputs in the current section
         const currentSection = formSections[form_section_count];
-        const requiredFields = currentSection.querySelectorAll('[required]');
-
 
         // Validate the fields
-        let allValid = true;
-        requiredFields.forEach(input => {
-            if (!input.value) {
-                allValid = false;
-                input.classList.add('error'); // Add an error class if empty
-            } else {
-                input.classList.remove('error'); // Remove error if valid
-            }
-        });
+        // let allValid = true;
+        // console.log(requiredFields);
+        // requiredFields.forEach(input => {
+        //     if (!input.value) {
+        //         allValid = false;
+        //         input.classList.add('error'); // Add an error class if empty
+        //     } else {
+        //         input.classList.remove('error'); // Remove error if valid
+        //     }
+        // });
 
         // If all fields are valid, go to the next section
-        if (allValid) {
-            // If it's the last section, change button to "Submit"
-            if (form_section_count === formSections.length - 1) {
-                // Submit the form
-                form.submit();
-            } else {
-                // Go to the next section
-                formSections[form_section_count].classList.remove('active');
-                form_section_count++;
-                formSections[form_section_count].classList.add('active');
-
-                // Check if we are on the last section now
-                if (form_section_count === formSections.length - 1) {
-                    formSectionChanger.textContent = "Submit";
-                }
-            }
+        // If it's the last section, change button to "Submit"
+        if (form_section_count === formSections.length - 1) {
+            // Submit the form
+            form.submit();
         } else {
-            alert("Please fill out all required fields.");
+            // Go to the next section
+            formSections[form_section_count].classList.remove('active');
+            form_section_count++;
+            formSections[form_section_count].classList.add('active');
+
+            // Check if we are on the last section now
+            if (form_section_count === formSections.length - 1) {
+                formSectionChanger.textContent = "Submit";
+            }
         }
+
     });
 
 });

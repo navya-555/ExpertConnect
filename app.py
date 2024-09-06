@@ -130,7 +130,10 @@ def add_expert():
         cv = request.files['cv'] if 'cv' in request.files else None
 
         # Read file data and save to the database
-        photo_data = photo.read()
+        try:
+            photo_data = photo.read()
+        except:
+            photo_data=None
         resume_data = resume.read()
         cv_data = cv.read() if cv else None
 
