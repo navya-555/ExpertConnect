@@ -100,7 +100,7 @@
         <!--cards-->
         <div class="card-container">
             <!-- Candidate Card -->
-            <div class="card">
+            <div class="card" style="max-height: 200px; flex-direction: row;">
                 <span class="title">Candidate</span>
                 <div class="card-icon">
                     <img src="{{ url_for('get_candidate_photo', username=candidate.username) }}" alt="Candidate Photo">
@@ -119,7 +119,7 @@
 
 
             <!-- Expert Card -->
-            <div class="card">
+            <div class="card" style="max-height: 200px; flex-direction: row;">
                 <span class="title">Expert</span>
                 <div class="card-icon">
                     <img src="{{ url_for('get_expert_photo', username=experts_scores[0][0]) }}" alt="Expert Photo">
