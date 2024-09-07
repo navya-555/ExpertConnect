@@ -1361,13 +1361,6 @@ video {
   }
 }
 
-@layer utilities{
-  .bg-custom-image{
-    background-image: url('D:/DA/SIH_24/ExpertConnect/static/img/bg.jpg');
-    background-size: cover;
-    background-position: centre;
-  }
-}
 
 .card:hover {
   box-shadow: 0 4px 8px rgba(15, 20, 29, 0.3);

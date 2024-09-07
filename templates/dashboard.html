@@ -98,15 +98,32 @@
         <h2 style="margin-bottom: 30px;">Matching Experts</h2>
 
         <!--cards-->
-        <div class="card-container" style="flex-direction: row; max-height: 200px;">
+        <div class="card-container">
             <!-- Candidate Card -->
-            <div class="card" style="flex-direction: row; max-height: 200px;">
+            <div class="card">
                 <span class="title">Candidate</span>
+                <div class="card-icon">
+                    <img src="{{ url_for('get_candidate_photo', username=candidate.username) }}" alt="Candidate Photo">
+                    <!-- Dynamic candidate image -->
+                </div>
+                <div class="card-info">
+                    <div><span class="info-name">Name:&nbsp;&nbsp;</span><span class="info-value">{{ candidate.name
+                            }}</span></div>
+                    <div><span class="info-name">Username:&nbsp;&nbsp;</span><span class="info-value">{{
+                            candidate.username }}</span></div>
+                    <div><span class="info-name">Email:&nbsp;&nbsp;</span><span class="info-value">{{ candidate.email
+                            }}</span></div>
+                </div>
+            </div>
+
+
+
+            <!-- Expert Card -->
+            <div class="card">
+                <span class="title">Expert</span>
                 <div class="card-icon">
                     <img src="{{ url_for('get_expert_photo', username=experts_scores[0][0]) }}" alt="Expert Photo">
                     <!-- Dynamic expert image -->
-                    <img src="{{ url_for('get_candidate_photo', username=candidate.username) }}" alt="Candidate Photo">
-                    <!-- Dynamic candidate image -->
                 </div>
                 <div class="card-info">
                     <div><span class="info-name">Name:&nbsp;&nbsp;</span><span class="info-value">{{
@@ -142,25 +159,30 @@
     </div>
 
     <div id="jobs" class="page " style="justify-content: center;">
-        <form action="/add_job" method="POST" enctype="multipart/form-data">
-            <div class="header">
-                <p>Add Jobs</p>
-                <p>For Candidate</p>
-            </div>
-            <div class="form-section">
-                <div class="input">
-                    <label for="username">Job Title:</label>
-                    <input type="text" id="username" name="username" required autofocus>
+        <form action="/add_job" method="POST" enctype="multipart/form-data" style="padding: 10px 30px;">
+            <div style="display: flex; flex-direction: column;">
+                <div class="header" style="line-height: 40px; margin-bottom: 20px;">
+                    <p>Add Jobs</p>
+                    <p>For Candidate</p>
                 </div>
-                <div class="input">
-                    <label for="jd">Job Description:</label>
-                    <div class="fileInputContainer">
-                        <p>Upload from memory</p>
-                        <input type="file" accept="application/pdf" name="jd" id="jd" required>
+                <div class="form-section">
+                    <div class="input">
+                        <label for="username">Job Title:</label>
+                        <input type="text" id="username" name="username" required autofocus>
                     </div>
-                    <span id="photo-file-name">No file chosen</span>
+                    <div class="input">
+                        <label for="jd">Job Description:</label>
+                        <div class="fileInputContainer">
+                            <p>Upload from memory</p>
+                            <input type="file" accept="application/pdf" name="jd" id="jd" required>
+                        </div>
+                        <span id="photo-file-name">No file chosen</span>
+                    </div>
+                    <button type="submit" id="match">Add Job</button>
                 </div>
-                <button type="submit" id="match">Add Job</button>
+            </div>
+            <div style="height: 300px;">
+                <img src="../static/img/addJobForm.jpg" alt="" style="width: 100%; height: 100%;">
             </div>
         </form>
 
