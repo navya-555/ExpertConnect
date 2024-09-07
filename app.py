@@ -284,10 +284,10 @@ def delete_expert(id):
     db.session.commit()
     return redirect("/dashboard")
 
-@app.route('/delete_jon/<int:id>')                  
+@app.route('/delete_job/<int:id>')                  
 def delete_job(id):
     job=Jobs.query.filter_by(id=id).first()
-    db.session.remove(job)
+    db.session.delete(job)
     db.session.commit()
     return redirect("/dashboard")
 
