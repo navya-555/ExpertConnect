@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Signup Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="static/css/adminLogin.css" rel="stylesheet"/>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+
+  <!-- Container for Login Form and Image -->
+  <div class="bg-white shadow-lg rounded-lg flex overflow-hidden w-full max-w-4xl mx-auto">
+
+    <!-- Left Side - Image -->
+    <div class="form-image">
+        <img src="loginsidepic2.jpg" class="login-image" alt="Form Image"> <!-- Replaced with uploaded image -->
+    </div>
+    
+    <!-- Right Side - Login Form -->
+    <div class="form-content w-full md:w-1/2 p-8">
+      <div class="text-center mb-6">
+        <img src="loginicon.png" alt="User Icon" class="w-16 h-16 mx-auto mb-4">
+        <h1 class="text-2xl font-bold text-gray-800 admin-text">Admin Signup</h1>
+      </div>
+
+      <!-- Admin Login Form -->
+      <form action="#" method="POST">
+        <div class="mb-4 relative">
+            <input type="username" id="admin_username" class="block w-full pl-5  py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Username">
+          </div>
+        <div class="mb-4 relative">
+          <input type="email" id="admin_email" class="block w-full pl-5  py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Email">
+        </div>
+
+        <div class="mb-4 relative">
+          <input type="password" id="password" class="block w-full pl-5  py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Password">
+        </div>
+        <div class="mb-4 relative">
+            <input type="password" id="cpassword" class="block w-full pl-5  py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Confirm Password">
+          </div>
+        <div class="flex items-center justify-center">
+          <button type="submit" class="bg-gradient-to-r from-purple-500 to-purple-700 text-white font-semibold py-2 px-6 rounded-md hover:from-purple-600 hover:to-purple-800 focus:ring-2 focus:ring-purple-400 focus:ring-offset-2">Create Account</button>
+        </div>
+      </form>    
+    </div>
+  </div>
+
+</body>
+</html>
