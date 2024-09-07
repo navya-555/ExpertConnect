@@ -30,6 +30,7 @@ class Expert(db.Model):
 
 class Candidate(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    job_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     username = db.Column(db.String(100), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -39,6 +40,10 @@ class Candidate(db.Model):
     cv = db.Column(db.LargeBinary, nullable=True)
     google_scholar_link = db.Column(db.String(200), nullable=True)
     github_link = db.Column(db.String(200), nullable=True)
+
+    __table_args__ = (
+        db.UniqueConstraint('username', 'job_id', name='unique_title_user'),
+    )
 
 
 class Jobs(db.Model):
