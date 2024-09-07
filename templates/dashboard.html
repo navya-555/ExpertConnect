@@ -98,15 +98,32 @@
         <h2 style="margin-bottom: 30px;">Matching Experts</h2>
 
         <!--cards-->
-        <div class="card-container" style="flex-direction: row; max-height: 200px;">
+        <div class="card-container">
             <!-- Candidate Card -->
-            <div class="card" style="flex-direction: row; max-height: 200px;">
+            <div class="card">
                 <span class="title">Candidate</span>
+                <div class="card-icon">
+                    <img src="{{ url_for('get_candidate_photo', username=candidate.username) }}" alt="Candidate Photo">
+                    <!-- Dynamic candidate image -->
+                </div>
+                <div class="card-info">
+                    <div><span class="info-name">Name:&nbsp;&nbsp;</span><span class="info-value">{{ candidate.name
+                            }}</span></div>
+                    <div><span class="info-name">Username:&nbsp;&nbsp;</span><span class="info-value">{{
+                            candidate.username }}</span></div>
+                    <div><span class="info-name">Email:&nbsp;&nbsp;</span><span class="info-value">{{ candidate.email
+                            }}</span></div>
+                </div>
+            </div>
+
+
+
+            <!-- Expert Card -->
+            <div class="card">
+                <span class="title">Expert</span>
                 <div class="card-icon">
                     <img src="{{ url_for('get_expert_photo', username=experts_scores[0][0]) }}" alt="Expert Photo">
                     <!-- Dynamic expert image -->
-                    <img src="{{ url_for('get_candidate_photo', username=candidate.username) }}" alt="Candidate Photo">
-                    <!-- Dynamic candidate image -->
                 </div>
                 <div class="card-info">
                     <div><span class="info-name">Name:&nbsp;&nbsp;</span><span class="info-value">{{

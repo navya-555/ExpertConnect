@@ -15,25 +15,27 @@
 
     <!-- Left Side - Image -->
     <div class="form-image">
-        <img src="loginsidepic2.jpg" class="login-image" alt="Form Image"> <!-- Replaced with uploaded image -->
+        <img src="static/img/loginsidepic2.jpg" class="login-image" alt="Form Image"> <!-- Replaced with uploaded image -->
     </div>
     
     <!-- Right Side - Login Form -->
     <div class="form-content w-full md:w-1/2 p-8">
       <div class="text-center mb-6">
-        <img src="loginicon.png" alt="User Icon" class="w-16 h-16 mx-auto mb-4">
+        <img src="static/img/loginicon.png" alt="User Icon" class="w-16 h-16 mx-auto mb-4">
         <h1 class="text-2xl font-bold text-gray-800 admin-text">Admin Login</h1>
       </div>
 
       <!-- Admin Login Form -->
-      <form action="#" method="POST">
+      <form action="/login" method="POST">
         <div class="mb-4 relative">
-          <input type="email" id="admin_email" class="block w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Email Address">
-          <img src="usericon.jpg" alt="User Icon" class="absolute left-2 top-2 w-6 h-6">
+          <input type="email" id="admin_email" name="admin_email"
+          class="block w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Email Address">
+          <img src="static/img/usericon.jpg" alt="User Icon" class="absolute left-2 top-2 w-6 h-6">
         </div>
 
         <div class="mb-4 relative">
-          <input type="password" id="password" class="block w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Password">
+          <input type="password" id="password" name="password" 
+          class="block w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Password">
           <img src="https://img.icons8.com/ios-glyphs/30/000000/lock-2.png" alt="Password Icon" class="absolute left-2 top-2 w-6 h-6">
         </div>
 

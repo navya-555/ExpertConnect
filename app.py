@@ -104,9 +104,26 @@ def b64encode_filter(data):
         return ""
     return base64.b64encode(data).decode('utf-8')
 
+
+
 @app.route('/')
 def index():
     return render_template("index.html")
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['admin_email']
+        password = request.form['password']
+        print(email,password)
+
+        if email == ('admin@gmail.com') and (password == '123456'):
+            return redirect('/dashboard')
+        else:
+            return render_template('adminLogin.html')
+
+    return render_template('adminLogin.html')
 
 @app.route('/dashboard')
 def dashboard():
@@ -268,7 +285,9 @@ def get_candidate_photo(username):
 def delete_candidate(id):
 
     candidate = Candidate.query.filter_by(id=id).first()
+    candidate_emb=Candidate_Emb.query.filter_by(id=id).first()
     db.session.delete(candidate)
+    db.session.delete(candidate_emb)
     db.session.commit()
     return redirect("/dashboard")
 
@@ -277,10 +296,8 @@ def delete_expert(id):
   
     expert = Expert.query.filter_by(id=id).first()
     expert_emb=Expert_Emb.query.filter_by(id=id).first()
-    candidate_emb=Candidate_Emb.query.filter_by(id=id).first()
     db.session.delete(expert)
     db.session.delete(expert_emb)
-    db.session.delete(candidate_emb)
     db.session.commit()
     return redirect("/dashboard")
 
