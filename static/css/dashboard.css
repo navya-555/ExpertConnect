@@ -98,7 +98,7 @@ div.page {
 }
 
 
-div#expert-match{
+div#expert-match, div#jobs{
     flex-direction: column;
     align-items: center;
     padding: 30px;
@@ -327,7 +327,7 @@ div#expert-match{
     }
 }
 
-div#addExpert, div#jobs {
+div#addExpert {
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -632,7 +632,7 @@ div#addExpert, div#jobs {
 
 a {
     text-decoration: none; /* Removes the underline */
-    color: white; /* Sets the text color to white */
+    color: black; /* Sets the text color to white */
 }
 
 a span {
