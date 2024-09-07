@@ -285,7 +285,9 @@ def get_candidate_photo(username):
 def delete_candidate(id):
 
     candidate = Candidate.query.filter_by(id=id).first()
+    candidate_emb=Candidate_Emb.query.filter_by(id=id).first()
     db.session.delete(candidate)
+    db.session.delete(candidate_emb)
     db.session.commit()
     return redirect("/dashboard")
 
@@ -294,10 +296,8 @@ def delete_expert(id):
   
     expert = Expert.query.filter_by(id=id).first()
     expert_emb=Expert_Emb.query.filter_by(id=id).first()
-    candidate_emb=Candidate_Emb.query.filter_by(id=id).first()
     db.session.delete(expert)
     db.session.delete(expert_emb)
-    db.session.delete(candidate_emb)
     db.session.commit()
     return redirect("/dashboard")
 
