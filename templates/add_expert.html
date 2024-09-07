@@ -26,31 +26,16 @@
         <div class="form-section">
             <h1>Files</h1>
             <div class="input">
-                <label for="photo">Upload your picture:*</label>
-                <div class="fileInputContainer">
-                    <p>Upload from memory</p>
-                    <input type="file" name="photo" accept="image/jpg, image/jpeg, image/png" id="photo"
-                        onchange="showFileName(this, 'photo-file-name')">
-                </div>
-                <!-- <span id="photo-file-name">No file chosen</span> -->
+                <label for="photo">Upload your picture:* </label>
+                <input type="file" accept="image/jpg, image/jpeg, image/png" name="photo" id="photo">
             </div>
             <div class="input">
                 <label for="resume">Upload your resume:* </label>
-                <div class="fileInputContainer">
-                    <p>Upload from memory</p>
-                    <input type="file" accept="application/pdf" name="resume" id="resume"
-                        onchange="showFileName(this, 'resume-file-name')">
-                </div>
-                <!-- <span id="resume-file-name">No file chosen</span> -->
+                <input type="file" accept="application/pdf" name="resume" id="resume">
             </div>
             <div class="input">
                 <label for="cv">Upload your CV: </label>
-                <div class="fileInputContainer">
-                    <p>Upload from memory</p>
-                    <input type="file" accept="application/pdf" name="cv" id="cv"
-                        onchange="showFileName(this, 'cv-file-name')">
-                </div>
-                <!-- <span id="cv-file-name">No file chosen</span> -->
+                <input type="file" accept="application/pdf" name="cv" id="cv">
             </div>
         </div>
         <div class="form-section">
