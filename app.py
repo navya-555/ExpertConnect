@@ -329,10 +329,16 @@ def delete_job(id):
     db.session.commit()
     return redirect("/dashboard")
 
+@app.route('/view_job/<int:id>')                  
+def view_job(id):
+    job = Jobs.query.filter_by(id=id).first()  # Get the job details
+    candidates = Candidate.query.filter_by(job_id=id).all()  # Get candidates for the job
+    
+    usernames = [candidate.username for candidate in candidates]  # Get all usernames for the job
+    scores = jd_candidate_score(job.jd, usernames)  # Calculate scores based on job description
+    
+    return render_template('view_job.html', job=job, scores=scores)
 
-@app.route('/cdashboard')
-def cdashboard():
-    return render_template("/Candidate_dashboard.html")
 
 
 def process_expert(user_name):
@@ -433,6 +439,23 @@ def jd_expert_score(jd_data):
                 continue
             score_list.append(compute_infoSource_pair(jd_emb,exp_emp[source]))
         expert_list.append((expert.username,
+                            max(score_list)))
+        
+    return sorted(expert_list, key=lambda x: x[1], reverse=True)
+
+def jd_candidate_score(jd_data,usernames):
+    jd_emb=process_job_des(jd_data)
+
+    expert_list=[]
+    for username in usernames:
+        candidate=Candidate_Emb.query.filter_by(username=username).first()
+        can_emb=candidate.get_embeddings()
+        score_list=[]
+        for source in can_emb.keys():
+            if not can_emb[source]:
+                continue
+            score_list.append(compute_infoSource_pair(jd_emb,can_emb[source]))
+        expert_list.append((candidate.username,
                             max(score_list)))
         
     return sorted(expert_list, key=lambda x: x[1], reverse=True)
