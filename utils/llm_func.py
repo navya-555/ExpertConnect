@@ -118,6 +118,12 @@ def process_resume_cv(pdf_data):
     emb=[generate_embeddings(skill_domain[0]),generate_embeddings(skill_domain[1])]
     return emb
 
+def process_job_des(pdf_data):
+    text=extract_text_from_pdf(pdf_data)
+    skill_domain=skill_domain_from_job_des(text)
+    emb=[generate_embeddings(skill_domain[0]),generate_embeddings(skill_domain[1])]
+    return emb
+
 def process_gscholar(url):
     domain=gscholar_scraper(url)
     emb=generate_embeddings(domain)
@@ -131,9 +137,3 @@ def process_github(url):
         emb=[generate_embeddings(skill_domain[0]),generate_embeddings(skill_domain[1])]
         project_embs.append(emb)
     return project_embs
-
-def process_job_des(pdf_data):
-    text=extract_text_from_pdf(pdf_data)
-    skill_domain=skill_domain_from_job_des(text)
-    emb=[generate_embeddings(skill_domain[0]),generate_embeddings(skill_domain[1])]
-    return emb

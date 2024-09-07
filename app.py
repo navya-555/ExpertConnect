@@ -41,33 +41,11 @@ class Candidate(db.Model):
     github_link = db.Column(db.String(200), nullable=True)
 
 
-
-
-@app.route('/delete_candidate/<int:id>')                  
-def delete_candidate(id):
-
-    candidate = Candidate.query.filter_by(id=id).first()
-    db.session.delete(candidate)
-    db.session.commit()
-    return redirect("/dashboard")
-
-
-
-@app.route('/delete_expert/<int:id>')                  
-def delete_expert(id):
-  
-    expert = Expert.query.filter_by(id=id).first()
-    expert_emb=Expert_Emb.query.filter_by(id=id).first()
-    candidate_emb=Candidate_Emb.query.filter_by(id=id).first()
-    db.session.delete(expert)
-    db.session.delete(expert_emb)
-    db.session.delete(candidate_emb)
-    db.session.commit()
-    return redirect("/dashboard")
-
-
-
-
+class Jobs(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    jd = db.Column(db.LargeBinary, nullable=False)
+    jd_emb = db.Column(db.Text, nullable=False)
 
 class Expert_Emb(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -134,18 +112,9 @@ def index():
 def dashboard():
     experts = Expert.query.all()
     candidates = Candidate.query.all()
-    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=None,candidate=None)
-
-@app.route('/cdashboard')
-def cdashboard():
-    return render_template("/Candidate_dashboard.html")
-
-
-
-
-
-
-
+    jobs=Jobs.query.all()
+    return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=None,
+                           candidate=None,jobs=jobs)
 
 @app.route('/logout')
 def logout():
@@ -241,6 +210,20 @@ def add_candidate():
         return redirect('/')
     return redirect('/')
 
+@app.route('/add_job', methods=['GET', 'POST'])
+def add_job():
+    job_title = request.form.get('username')
+    jd_file = request.files['jd']
+    jd_data = jd_file.read()
+    emb=process_job_des(jd_data)
+    jd_embedding = json.dumps(emb)
+
+    new_job = Jobs(title=job_title, jd=jd_data, jd_emb=jd_embedding)
+
+    db.session.add(new_job)
+    db.session.commit()
+    return redirect('/dashboard')
+
 @app.route('/match', methods=['POST'])
 def match():
     can_username = request.form.get('username')
@@ -269,7 +252,6 @@ def match():
     candidates = Candidate.query.all()
     return render_template("dashboard.html",experts=experts,candidates=candidates,experts_scores=experts_scores,candidate=candidate)
 
-
 @app.route('/expert/photo/<username>')
 def get_expert_photo(username):
     expert = Expert.query.filter_by(username=username).first()
@@ -281,6 +263,38 @@ def get_candidate_photo(username):
     candidate = Candidate.query.filter_by(username=username).first()
     if candidate and candidate.photo:
         return Response(candidate.photo, mimetype='image/jpeg')  # Adjust mimetype as needed (e.g., image/png)
+
+@app.route('/delete_candidate/<int:id>')                  
+def delete_candidate(id):
+
+    candidate = Candidate.query.filter_by(id=id).first()
+    db.session.delete(candidate)
+    db.session.commit()
+    return redirect("/dashboard")
+
+@app.route('/delete_expert/<int:id>')                  
+def delete_expert(id):
+  
+    expert = Expert.query.filter_by(id=id).first()
+    expert_emb=Expert_Emb.query.filter_by(id=id).first()
+    candidate_emb=Candidate_Emb.query.filter_by(id=id).first()
+    db.session.delete(expert)
+    db.session.delete(expert_emb)
+    db.session.delete(candidate_emb)
+    db.session.commit()
+    return redirect("/dashboard")
+
+@app.route('/delete_job/<int:id>')                  
+def delete_job(id):
+    job=Jobs.query.filter_by(id=id).first()
+    db.session.delete(job)
+    db.session.commit()
+    return redirect("/dashboard")
+
+
+@app.route('/cdashboard')
+def cdashboard():
+    return render_template("/Candidate_dashboard.html")
 
 
 def process_expert(user_name):
