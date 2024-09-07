@@ -97,7 +97,8 @@ div.page {
     }
 }
 
-div#expert-match {
+
+div#expert-match, div#jobs{
     flex-direction: column;
     align-items: center;
     padding: 30px;
@@ -545,16 +546,17 @@ div#addExpert {
 
 .card {
     position: relative;
-    margin-top: 50px; /*todo: remove this line*/
     width: fit-content;
     height: fit-content;
     background-color: white;
     border-radius: 10px;
     padding: 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 20px;
-    max-height: 200px;
+    min-width: 300px;
+    /* max-height: 200px; */
     box-shadow: 2px 2px 6px 4px rgba(0, 0, 0, 0.2);
     border: 2px solid #202a36;
     span.title {
@@ -590,19 +592,42 @@ div#addExpert {
         span.info-name {
             white-space: nowrap;
             font-family: "Suse";
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 600;
         }
         span.info-value {
             white-space: nowrap;
             font-family: "Titillium Web";
-            font-size: 1.3rem;
+            font-size: 1.1rem;
         }
     }
 }
 
 .expanded {
     width: 235px !important;
+}
+
+.expert-delete {
+    a{
+        position: absolute;
+        bottom: 10px;
+        right: 12px;
+        padding: 13px;
+        border-radius: 50%;
+        background-color: #202a36;
+        transition: all 0.3s;
+        i{
+            color: white;
+            font-size: 20px;
+        }
+        &:hover{
+            background-color: orangered;
+            transform: scale(1.1);
+        }
+        &:active{
+            transform: scale(0.9);
+        }
+    }
 }
 
 a {
