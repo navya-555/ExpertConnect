@@ -1,77 +1,81 @@
 {% if candidates %}
-        <!-- <h2 class="table-heading">Candidates Information</h2> -->
-        <table>
-            <thead>
-                <tr>
-                    <th class="bordered">Sno</th>
-                    <th class="bordered">Name</th>
-                    <th class="bordered">Username</th>
-                    <th class="bordered">Email</th>
-                    <th class="bordered">Phone</th>
-                    <th class="bordered">Google Scholar</th>
-                    <th class="bordered">GitHub</th>
-                    <th class="bordered">Photo</th>
-                    <th class="bordered">Resume</th>
-                    <th class="bordered">CV</th>
-                    <th class="bordered">Job ID</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for candidate in candidates %}
-                <tr>
-                    <td>{{loop.index}}</td>
-                    <td>{{ candidate.name }}</td>
-                    <td>{{ candidate.username }}</td>
-                    <td>{{ candidate.email }}</td>
-                    <td>{{ candidate.phone }}</td>
-                    <td>
-                        {% if candidate.google_scholar_link %}
-                        <a href="{{ candidate.google_scholar_link }}" target="_blank"> <i class="fa-regular fa-eye"></i>
-                            View</a>
-                        {% else %}
-                        N/A
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if candidate.github_link %}
-                        <a href="{{ candidate.github_link }}" target="_blank"> <i class="fa-regular fa-eye"></i> View</a>
-                        {% else %}
-                        N/A
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if candidate.photo %}
-                        <img src="data:image/png;base64,{{ candidate.photo | b64encode }}" alt="Photo" width="100">
-                        {% else %}
-                        N/A
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if candidate.resume %}
-                        <a href="data:application/pdf;base64,{{ candidate.resume | b64encode }}"
-                            download="resume.pdf"><i class="fa-solid fa-file-arrow-down"></i> Download</a>
-                        {% else %}
-                        N/A
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if candidate.cv %}
-                        <a href="data:application/pdf;base64,{{ candidate.cv | b64encode }}" download="cv.pdf"><i
-                                class="fa-solid fa-file-arrow-down"></i> Download</a>
-                        {% else %}
-                        N/A
-                        {% endif %}
-                    </td>
-                    <td>{{ candidate.job_id }}</td>
-                    <td>
-                        <a href="/delete_candidate/{{candidate.id}}" type="button"
-                            class="btn btn-outline-dark btn-sm mx-1">Delete</button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-        <p>No candidates registered.</p>
-        {% endif %}
+<!-- <h2 class="table-heading">Candidates Information</h2> -->
+<div style="display: flex; flex-direction: row; flex-wrap: wrap; width: 100vw; height: 100vh; overflow: auto; gap: 20px;padding: 30px;">
+
+    {% for candidate in candidates %}
+    <div class="card">
+        <span class="title">Candidate</span>
+        <div class="card-icon">
+            <img src="data:image/png;base64,{{ candidate.photo | b64encode }}" alt="Photo" width="100">
+        </div>
+        <div class="card-info">
+            <div>
+                <span class="info-name">Name:&nbsp;&nbsp;</span>
+                <span class="info-value">{{ candidate.name }}</span>
+            </div>
+            <div>
+                <span class="info-name">Username:&nbsp;&nbsp;</span>
+                <span class="info-value">{{ candidate.username }}</span>
+            </div>
+            <div>
+                <span class="info-name">Email:&nbsp;&nbsp;</span>
+                <span class="info-value">{{ candidate.email }}</span>
+            </div>
+            <div>
+                <span class="info-name">Phone:&nbsp;&nbsp;</span>
+                <span class="info-value">{{ candidate.phone }}</span>
+            </div>
+            <div>
+                <span class="info-name">Google Scholar:&nbsp;&nbsp;</span>
+                <span class="info-value">
+                    {% if candidate.google_scholar_link %}
+                    <a href="{{ candidate.google_scholar_link }}" target="_blank"> <i class="fa-regular fa-eye"></i>
+                        View</a>
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </span>
+            </div>
+            <div>
+                <span class="info-name">GitHub:&nbsp;&nbsp;</span>
+                <span class="info-value">
+                    {% if candidate.github_link %}
+                    <a href="{{ candidate.github_link }}" target="_blank"> <i class="fa-regular fa-eye"></i>
+                        View</a>
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </span>
+            </div>
+            <div>
+                <span class="info-name">Resume:&nbsp;&nbsp;</span>
+                <span class="info-value">
+                    {% if candidate.resume %}
+                    <a href="data:application/pdf;base64,{{ candidate.resume | b64encode }}" download="resume.pdf"><i
+                            class="fa-solid fa-file-arrow-down"></i> Download</a>
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </span>
+            </div>
+            <div>
+                <span class="info-name">CV:&nbsp;&nbsp;</span>
+                <span class="info-value">
+                    {% if candidate.cv %}
+                    <a href="data:application/pdf;base64,{{ candidate.cv | b64encode }}" download="cv.pdf"><i
+                            class="fa-solid fa-file-arrow-down"></i> Download</a>
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </span>
+            </div>
+            <div class="expert-delete">
+                <a href="/delete_candidate/{{candidate.id}}" type="button"><i class="fa-solid fa-trash"></i></a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No candidates registered.</p>
+{% endif %}
