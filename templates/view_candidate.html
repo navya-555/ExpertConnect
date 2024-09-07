@@ -13,6 +13,7 @@
                     <th class="bordered">Photo</th>
                     <th class="bordered">Resume</th>
                     <th class="bordered">CV</th>
+                    <th class="bordered">Job ID</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -62,6 +63,7 @@
                         N/A
                         {% endif %}
                     </td>
+                    <td>{{ candidate.job_id }}</td>
                     <td>
                         <a href="/delete_candidate/{{candidate.id}}" type="button"
                             class="btn btn-outline-dark btn-sm mx-1">Delete</button>
