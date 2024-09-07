@@ -632,7 +632,7 @@ div#addExpert {
 
 a {
     text-decoration: none; /* Removes the underline */
-    color: white; /* Sets the text color to white */
+    color: black; /* Sets the text color to white */
 }
 
 a span {
