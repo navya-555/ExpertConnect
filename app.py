@@ -1,8 +1,9 @@
-from flask import Flask, redirect, render_template, request, Response,flash
+from flask import Flask, redirect, render_template, request, Response,send_file, abort
 from flask_sqlalchemy import SQLAlchemy
 import base64
 import json
 import numpy as np
+import io
 import threading
 from utils.llm_func import process_resume_cv,process_gscholar,compute_infoSource_pair,process_job_des,process_github
 
@@ -30,7 +31,7 @@ class Expert(db.Model):
 
 class Candidate(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    job_id = db.Column(db.Integer, primary_key=True)
+    job_id = db.Column(db.Integer)
     name = db.Column(db.String(100), nullable=False)
     username = db.Column(db.String(100), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -113,7 +114,20 @@ def b64encode_filter(data):
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    jobs = Jobs.query.all()
+    return render_template("index.html",jobs=jobs)
+
+@app.route('/download-jd/<int:job_id>')
+def download_jd(job_id):
+    job = Jobs.query.get_or_404(job_id)
+    if job and job.jd:
+        return send_file(
+            io.BytesIO(job.jd),  # Assuming job.jd stores binary content of the file
+            as_attachment=True,
+            download_name=f'{job.title}_description.pdf'  # You can customize the file name here
+        )
+    else:
+        abort(404)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -142,9 +156,52 @@ def dashboard():
 def logout():
     return redirect("/")
 
-@app.route('/candidate_form')
-def candidate_form():
-    return render_template("candidate_form.html")
+@app.route('/candidate_form/<int:job_id>')
+def candidate_form(job_id):
+    job = Jobs.query.get_or_404(job_id)
+    return render_template('candidate_form.html', job=job)
+
+@app.route('/add_candidate', methods=['POST'])
+def add_candidate():
+    job_id = request.form['job_id']
+    name = request.form['name']
+    username = request.form['username']
+    phone = request.form['phone']
+    email = request.form['email']
+    google_scholar_link = request.form['google-scholar']
+    github_link = request.form['github']
+
+    # Handle file uploads
+    photo = request.files['photo'].read()
+    resume = request.files['resume'].read()
+    cv = request.files.get('cv').read() if request.files.get('cv') else None
+
+    # Check if the candidate already exists for this job (optional)
+    existing_candidate = Candidate.query.filter_by(username=username, job_id=job_id).first()
+    if existing_candidate:
+        return redirect('/')
+
+    # Create new Candidate instance
+    new_candidate = Candidate(
+        job_id=job_id,
+        name=name,
+        username=username,
+        email=email,
+        phone=phone,
+        photo=photo,
+        resume=resume,
+        cv=cv,
+        google_scholar_link=google_scholar_link,
+        github_link=github_link
+    )
+
+
+    db.session.add(new_candidate)
+    db.session.commit()
+
+    process_candidate(username)
+
+    return redirect('/')
 
 @app.route('/add_expert', methods=['GET', 'POST'])
 def add_expert():
@@ -185,52 +242,11 @@ def add_expert():
         db.session.add(new_expert)
         db.session.commit()
 
-        threading.Thread(target=process_expert, args=(username,)).start()
+        process_expert(username)
 
         # Redirect to dashboard or any other page
         return redirect('/dashboard')
     return redirect('/dashboard')
-
-@app.route('/add_candidate', methods=['GET', 'POST'])
-def add_candidate():
-    if request.method == 'POST':
-        # Get form data
-        name = request.form['name']
-        username = request.form['username']
-        email = request.form['email']
-        phone = request.form['phone']
-
-        # Handle file uploads
-        photo = request.files['photo']
-        resume = request.files['resume']
-        cv = request.files['cv'] if 'cv' in request.files else None
-
-        # Read file data and save to the database
-        photo_data = photo.read()
-        resume_data = resume.read()
-        cv_data = cv.read() if cv else None
-
-        # Create a new Candidate record
-        new_candidate = Candidate(
-            name=name,
-            username=username,
-            email=email,
-            phone=phone,
-            photo=photo_data,
-            resume=resume_data,
-            cv=cv_data,
-            google_scholar_link=request.form.get('google-scholar'),
-            github_link=request.form.get('github')
-        )
-
-        # Add the record to the session and commit to the database
-        db.session.add(new_candidate)
-        db.session.commit()
-
-        threading.Thread(target=process_candidate, args=(username,)).start()
-
-        return redirect('/')
-    return redirect('/')
 
 @app.route('/add_job', methods=['GET', 'POST'])
 def add_job():
@@ -340,10 +356,10 @@ def process_expert(user_name):
         else:
             gs_emb=None
 
-        if expert.github_link:
-            git_emb=process_github(expert.google_scholar_link)
-        else:
-            git_emb=None
+        # if expert.github_link:
+        #     git_emb=process_github(expert.google_scholar_link)
+        # else:
+        #     git_emb=None
 
         new_expert_embeddings = Expert_Emb(username=user_name)
         new_expert_embeddings.set_embeddings(resume_emb, cv_emb, gs_emb, None)
@@ -370,10 +386,10 @@ def process_candidate(user_name):
         else:
             gs_emb = None
 
-        if candidate.github_link:
-            git_emb=process_github(candidate.google_scholar_link)
-        else:
-            git_emb=None
+        # if candidate.github_link:
+        #     git_emb=process_github(candidate.google_scholar_link)
+        # else:
+        #     git_emb=None
 
         # Create a new Candidate_Emb record and save the embeddings
         new_candidate_embeddings = Candidate_Emb(username=user_name)

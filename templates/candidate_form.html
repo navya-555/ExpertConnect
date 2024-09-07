@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,91 +9,101 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 </head>
+
 <body>
     <form action="/add_candidate" method="POST" enctype="multipart/form-data">
-    <div class="form-container">
-        <div class="form-box">
-            <div class="form-content">
-                <h1 class="form-title">Fill up the following details:</h1>
-                <fieldset class="form-step active">
-                    <h2 class="form-subtitle">Personal Info:</h2>
-                    <input type="text" id="name" aria-label="Name" name="name" class="form-input" placeholder="Name" required>
-                    <input type="text" id="username" name="username" aria-label="Username" class="form-input" placeholder="Username" required>
-                    <input type="tel" id="phone" name="phone" aria-label="phone" class="form-input" placeholder="Phone" required>
-                    <input type="email" id="email" name="email" aria-label="email" class="form-input" placeholder="Email" required>
-                    <input type="button" name="next" class="next action-button" value="Next" />
-                </fieldset>
-                <fieldset class="form-step">
-                    <h2 class="form-subtitle">Upload Documents:</h2>
-                    <div class="upload-row">
-                        <label for="photo">Photo :</label>
-                        <input type="file" id="photo" name="photo"  accept="image/jpg, image/jpeg, image/png" required>
-                    </div>
-                    <div class="upload-row">
-                        <label for="resume">Resume:</label>
-                        <input type="file" id="resume" name="resume" accept=".pdf, .docx" required>
-                    </div>
-                    <div class="upload-row">
-                        <label for="cv">CV :</label>
-                        <input type="file" id="cv" name="cv" accept=".pdf, .docx">
-                    </div>
-                    <input type="button" name="previous" class="previous action-button" value="Previous" />
-                    <input type="button" name="next" class="next action-button" value="Next" />
-                </fieldset>
-                <fieldset class="form-step">
-                    <h2 class="form-subtitle">Online Profiles:</h2>
-                    <input type="url" id="google-scholar" name="google-scholar" class="form-input" placeholder="Google Scholar Link">
-                    <input type="url" id="github" name="github" class="form-input" placeholder="GitHub Link">
-                    <input type="button" name="previous" class="previous action-button" value="Previous" />
-                    <button type="submit" class="submit action-button">Submit</button>
-                </fieldset>
-            </div>
-            <div class="form-image">
-                <img src="static/img/regpic.jpg" alt="Form Image">
+        <div class="form-container">
+            <div class="form-box">
+                <div class="form-content">
+                    <h1 class="form-title">Fill up the following details for {{ job.title }}</h1>
+                    <!-- Add a hidden input to store job_id -->
+                    <input type="hidden" name="job_id" value="{{ job.id }}">
+                    <fieldset class="form-step active">
+                        <h2 class="form-subtitle">Personal Info:</h2>
+                        <input type="text" id="name" aria-label="Name" name="name" class="form-input" placeholder="Name"
+                            required>
+                        <input type="text" id="username" name="username" aria-label="Username" class="form-input"
+                            placeholder="Username" required>
+                        <input type="tel" id="phone" name="phone" aria-label="phone" class="form-input"
+                            placeholder="Phone" required>
+                        <input type="email" id="email" name="email" aria-label="email" class="form-input"
+                            placeholder="Email" required>
+                        <input type="button" name="next" class="next action-button" value="Next" />
+                    </fieldset>
+                    <fieldset class="form-step">
+                        <h2 class="form-subtitle">Upload Documents:</h2>
+                        <div class="upload-row">
+                            <label for="photo">Photo :</label>
+                            <input type="file" id="photo" name="photo" accept="image/jpg, image/jpeg, image/png"
+                                required>
+                        </div>
+                        <div class="upload-row">
+                            <label for="resume">Resume:</label>
+                            <input type="file" id="resume" name="resume" accept=".pdf, .docx" required>
+                        </div>
+                        <div class="upload-row">
+                            <label for="cv">CV :</label>
+                            <input type="file" id="cv" name="cv" accept=".pdf, .docx">
+                        </div>
+                        <input type="button" name="previous" class="previous action-button" value="Previous" />
+                        <input type="button" name="next" class="next action-button" value="Next" />
+                    </fieldset>
+                    <fieldset class="form-step">
+                        <h2 class="form-subtitle">Online Profiles:</h2>
+                        <input type="url" id="google-scholar" name="google-scholar" class="form-input"
+                            placeholder="Google Scholar Link">
+                        <input type="url" id="github" name="github" class="form-input" placeholder="GitHub Link">
+                        <input type="button" name="previous" class="previous action-button" value="Previous" />
+                        <button type="submit" class="submit action-button">Submit</button>
+                    </fieldset>
+                </div>
+                <div class="form-image">
+                    <img src="./../static\img\regpic.jpg"alt="Form Image">
+                </div>
             </div>
         </div>
-    </div>
     </form>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-    const steps = Array.from(document.querySelectorAll(".form-step"));
-    const nextBtns = document.querySelectorAll(".next");
-    const prevBtns = document.querySelectorAll(".previous");
-    let currentStep = 0;
+        document.addEventListener("DOMContentLoaded", function () {
+            const steps = Array.from(document.querySelectorAll(".form-step"));
+            const nextBtns = document.querySelectorAll(".next");
+            const prevBtns = document.querySelectorAll(".previous");
+            let currentStep = 0;
 
-    // Show the current step
-    function showStep(stepIndex) {
-        steps.forEach((step, index) => {
-            step.classList.toggle("active", index === stepIndex);
-        });
-    }
-
-    // Next button click event
-    nextBtns.forEach(button => {
-        button.addEventListener("click", () => {
-            if (currentStep < steps.length - 1) {
-                currentStep++;
-                showStep(currentStep);
+            // Show the current step
+            function showStep(stepIndex) {
+                steps.forEach((step, index) => {
+                    step.classList.toggle("active", index === stepIndex);
+                });
             }
-        });
-    });
 
-    // Previous button click event
-    prevBtns.forEach(button => {
-        button.addEventListener("click", () => {
-            if (currentStep > 0) {
-                currentStep--;
-                showStep(currentStep);
-            }
-        });
-    });
+            // Next button click event
+            nextBtns.forEach(button => {
+                button.addEventListener("click", () => {
+                    if (currentStep < steps.length - 1) {
+                        currentStep++;
+                        showStep(currentStep);
+                    }
+                });
+            });
 
-    // Initial display of first step
-    showStep(currentStep);
-});
+            // Previous button click event
+            prevBtns.forEach(button => {
+                button.addEventListener("click", () => {
+                    if (currentStep > 0) {
+                        currentStep--;
+                        showStep(currentStep);
+                    }
+                });
+            });
+
+            // Initial display of first step
+            showStep(currentStep);
+        });
 
 
     </script>
 </body>
+
 </html>

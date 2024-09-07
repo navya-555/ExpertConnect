@@ -97,8 +97,8 @@ div.page {
     }
 }
 
-
-div#expert-match, div#jobs{
+div#expert-match,
+div#jobs {
     flex-direction: column;
     align-items: center;
     padding: 30px;
@@ -166,6 +166,7 @@ div#expert-match, div#jobs{
                     font-family: "Suse";
                     box-shadow: 5px 5px #202a36;
                     border: 2px solid #202a36;
+                    max-width: 250px;
                     @media screen and (max-width: 768px) {
                         padding: 5px 10px;
                     }
@@ -453,40 +454,6 @@ div#addExpert {
                             max-width: 230px;
                         }
                     }
-                    div.fileInputContainer {
-                        border: 2px solid #202a36;
-                        border-radius: 5px;
-                        padding: 5px 10px;
-                        position: relative;
-                        overflow: hidden;
-                        font-family: "Suse", sans-serif;
-                        &:hover {
-                            background-color: #202a36;
-                            color: white;
-                        }
-                        &:has(.error) {
-                            border: 2px solid red;
-                        }
-                        @media screen and (max-width: 520px) {
-                            width: 100%;
-                            text-align: center;
-                        }
-                        p {
-                            margin: 0;
-                            white-space: nowrap;
-                            @media screen and (max-width: 768px) {
-                                font-size: 13px;
-                            }
-                            @media screen and (max-width: 520px) {
-                                font-size: 15px;
-                            }
-                        }
-                        input {
-                            transform: scale(5);
-                            opacity: 0;
-                            position: absolute;
-                        }
-                    }
                 }
             }
         }
@@ -608,7 +575,7 @@ div#addExpert {
 }
 
 .expert-delete {
-    a{
+    a {
         position: absolute;
         bottom: 10px;
         right: 12px;
@@ -616,15 +583,15 @@ div#addExpert {
         border-radius: 50%;
         background-color: #202a36;
         transition: all 0.3s;
-        i{
+        i {
             color: white;
             font-size: 20px;
         }
-        &:hover{
+        &:hover {
             background-color: orangered;
             transform: scale(1.1);
         }
-        &:active{
+        &:active {
             transform: scale(0.9);
         }
     }

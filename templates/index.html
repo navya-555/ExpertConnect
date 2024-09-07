@@ -71,135 +71,22 @@
     <section id="job-openings">
         <h1>Job Openings</h1>
         <div id="job-cards" class="flex gap-6" style="margin-top: 20px;">
+            {% for job in jobs %}
             <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
+                <p>{{ job.title }}</p> <!-- Display the job title -->
                 <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
+                    <span>Job Description</span>
+                    <!-- You can provide a download link for the job description (PDF or document format) -->
+                    <a href="/download_jd/{{job.id}}"><i class="fa-solid fa-download"></i></a>
                 </div>
-                <button style="background-color: #0084ff;">Apply</button>
+                <a href="candidate_form/{{job.id}}">
+                    <button style="background-color: #0084ff;">Apply</button>
+                </a>
             </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            <div class="home-card" style="background-color: #0084ff7e; border: 2px solid #0084ff">
-                <p>Manager</p>
-                <div>
-                    <span>Job Description</span><i class="fa-solid fa-download"></i>
-                </div>
-                <button style="background-color: #0084ff;">Apply</button>
-            </div>
-            
+            {% endfor %}
         </div>
     </section>
+    
     <!-- About Us Section -->
     <section id="about" class="py-16 bg-white">
         <div class="container mx-auto">

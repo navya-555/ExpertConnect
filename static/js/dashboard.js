@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const nav = document.querySelector("nav");
     const navItemTitles = document.querySelectorAll(".nav-item-title");
     const formSectionChanger = document.getElementById('form-section-changer');
-    const formSections = document.querySelectorAll('.form-section');
+    const expertRegistrationForm = document.getElementById('expert-registration-form');
+    const formSections = expertRegistrationForm.querySelectorAll('.form-section');
     const form = document.getElementById('expert-registration-form');
 
     let form_section_count = 0;
@@ -54,9 +55,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     formSectionChanger.addEventListener('click', (e) => {
         e.preventDefault();
+        console.log('clicked', form_section_count);
 
         // Get all required inputs in the current section
-        const currentSection = formSections[form_section_count];
+        // const currentSection = formSections[form_section_count];
 
         // Validate the fields
         // let allValid = true;
@@ -72,6 +74,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // If all fields are valid, go to the next section
         // If it's the last section, change button to "Submit"
+        console.log(form_section_count, formSections.length - 1)
+        console.log(formSections);
         if (form_section_count === formSections.length - 1) {
             // Submit the form
             form.submit();
